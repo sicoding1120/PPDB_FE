@@ -19,10 +19,15 @@ import {
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import { FiHome } from 'react-icons/fi'
+import { FiBookOpen } from 'react-icons/fi'
+import { RiVerifiedBadgeLine } from 'react-icons/ri'
+import { PiHandSwipeRight } from 'react-icons/pi'
+import { MdPublishedWithChanges } from 'react-icons/md'
 
 export function AppSidebar () {
   return (
-    <Sidebar>
+    <Sidebar className='border-slate-300 b px-2'>
       <SidebarHeader>
         <SidebarGroup>
           <SidebarGroupLabel className='text-xl'>My PPDB</SidebarGroupLabel>
@@ -42,7 +47,9 @@ export const OverviewSection = () => {
   return (
     <SidebarMenu className='mt-2'>
       <SidebarMenuItem>
-        <SidebarMenuButton className='capitalize text-md'>
+        <SidebarMenuButton className='capitalize text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'>
+          <FiHome />
+
           <Link href={'/dashboard/admin/'}>Overview</Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -57,10 +64,13 @@ export const ManagePPDBSection = () => {
         <SidebarMenuItem>
           <CollapsibleTrigger asChild>
             <SidebarMenuButton
-              className='flex items-center justify-between w-full text-md'
+              className='flex items-center justify-between w-full text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'
               data-collapsible-trigger
             >
-              <span>Manage New PPDB</span>
+              <div className='flex gap-2 items-center'>
+                <FiBookOpen />
+                <span>Manage New PPDB</span>
+              </div>
 
               <ChevronRight
                 className='h-4 w-4 transition-transform duration-200'
@@ -70,14 +80,16 @@ export const ManagePPDBSection = () => {
           </CollapsibleTrigger>
           <CollapsibleContent>
             <SidebarMenuSub>
-              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2'>
+              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
                 <Link href={'/dashboard/admin/form-ppdb'}>Form PPDB</Link>
               </SidebarMenuSubItem>
-              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2'>
-                <Link href={'/dashboard/admin/validation-doc'}>Validation Doc</Link>
+              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
+                <Link href={'/dashboard/admin/validation-doc'}>
+                  Validation Doc
+                </Link>
               </SidebarMenuSubItem>
-              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2'>
-                <Link href={"/dashboard/admin/confirm-doc"}>Confirm Doc</Link>
+              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
+                <Link href={'/dashboard/admin/confirm-doc'}>Confirm Doc</Link>
               </SidebarMenuSubItem>
             </SidebarMenuSub>
           </CollapsibleContent>
@@ -91,7 +103,8 @@ export const VerificationPaymentSection = () => {
   return (
     <SidebarMenu className='mt-2'>
       <SidebarMenuItem>
-        <SidebarMenuButton className='capitalize text-md'>
+        <SidebarMenuButton className='capitalize text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'>
+          <RiVerifiedBadgeLine />
           <Link href={'/dashboard/admin/verification-payment'}>
             verification payment
           </Link>
@@ -108,10 +121,13 @@ export const SelectionPPDB = () => {
         <SidebarMenuItem>
           <CollapsibleTrigger asChild>
             <SidebarMenuButton
-              className='flex items-center justify-between w-full text-md'
+              className='flex items-center justify-between w-full text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'
               data-collapsible-trigger
             >
-              <span>Selection PPDB</span>
+              <div className='flex gap-2 items-center'>
+                <PiHandSwipeRight />
+                <span>Selection PPDB</span>
+              </div>
 
               <ChevronRight
                 className='h-4 w-4 transition-transform duration-200'
@@ -121,11 +137,15 @@ export const SelectionPPDB = () => {
           </CollapsibleTrigger>
           <CollapsibleContent>
             <SidebarMenuSub>
-              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2'>
-               <Link href={"/dashboard/admin/selection-ppdb/online"}>Online</Link>
+              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
+                <Link href={'/dashboard/admin/selection-ppdb/online'}>
+                  Online
+                </Link>
               </SidebarMenuSubItem>
-              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2'>
-                <Link href={'/dashboard/admin/selection-ppdb/offline'}>Offline</Link>
+              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
+                <Link href={'/dashboard/admin/selection-ppdb/offline'}>
+                  Offline
+                </Link>
               </SidebarMenuSubItem>
             </SidebarMenuSub>
           </CollapsibleContent>
@@ -139,7 +159,8 @@ export const PublishPPDB = () => {
   return (
     <SidebarMenu className='mt-2'>
       <SidebarMenuItem>
-        <SidebarMenuButton className='capitalize text-md'>
+        <SidebarMenuButton className='capitalize text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'>
+        <MdPublishedWithChanges />
           <Link href={'/dashboard/admin/publish-result'}>
             Publish result PPDB
           </Link>

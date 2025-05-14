@@ -1,9 +1,11 @@
+"use client"
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/app-sidebar'
 import { CiSearch } from 'react-icons/ci'
 
 import { FiMail } from 'react-icons/fi'
 import { Avatar } from '@/components/ui/avatar'
+import AOSInit from '@/lib/aos'
 
 
 
@@ -14,9 +16,10 @@ export default function DashboardLayout ({
 }) {
   return (
     <SidebarProvider>
-      <AppSidebar />
-      <main className='w-full bg-black/5'>
-        <div className='w-full px-2 h-12 border-b  py-2  bg-white flex gap-2 items-center justify-between'>
+     <AOSInit/>
+      <AppSidebar/>
+      <main className='w-full bg-slate-100'>
+        <div className='w-full px-2 h-12 border-b border-slate-300  py-2  bg-white flex gap-2 items-center justify-between'>
           <div className='flex items-center gap-2 w-2/3'>
             <SidebarTrigger />
             <p className='text-xl font-semibold'>Dashboard</p>
@@ -37,7 +40,7 @@ export default function DashboardLayout ({
             </Avatar>
           </div>
         </div>
-        <section className=''>{children}</section>
+        <section className='px-4 py-4'>{children}</section>
       </main>
     </SidebarProvider>
   )
