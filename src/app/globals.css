@@ -139,6 +139,9 @@
 .bg-dashboard {
   background-image: url('/bg-dashboard.jpeg');
 }
+.bg-login {
+  background-image: url('/bacground_login.png');
+}
 
 .scroll-container {
   overflow: auto;
