@@ -1,9 +1,10 @@
 'use client'
+// import Image from "next/image";
 
 import Client from '@/components/client';
 import Colab from '@/components/colaboration';
 import Demo from '@/components/demo';
-import Hero from '@/components/hero';
+// import Hero from '@/components/hero';
 import Hero1 from '@/components/hero1';
 import Learn from '@/components/learn';
 import NavbarK from '@/components/navabar';
