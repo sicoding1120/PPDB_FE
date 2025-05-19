@@ -1,0 +1,10 @@
+                            <div key={`bottom-${index}`} className="w-95 h-35 flex border-1 border-gray-400 rounded-lg bg-white shadow-md shadow-gray-400 mx-4">
+                                <div className="m-2 flex flex-col space-y-1.5 w-40 justify-center items-center">
+                                    <div className="h-10 w-10 bg-black rounded-full" />
+                                    <p className={`text-sm font-semibold ${poppins.className}`}>Abu Fulan</p>
+                                    <p className={`text-xs text-gray-500 ${poppins.className}`}>Wali Santri</p>
+                                </div>
+                                <div className="flex mt-5 items-center text-center justify-center m-2">
+                                    <p className="text-base italic">"Pendaftarannya mudah dan bisa dari <span className="ml-1.5">rumah. Sangat membantu!"</span></p>
+                                </div>
+                            </div>
