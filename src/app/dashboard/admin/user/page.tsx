@@ -24,9 +24,9 @@ import { siswaData } from '@/data/siswa'
 import { CiSearch } from 'react-icons/ci'
 
 
-const ValidationPage = () => {
+const UserPage = () => {
   return (
-   <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2'>
+<div className='w-full h-full rounded-xl flex flex-col gap-4 px-2'>
   <div className='flex justify-between items-center w-full h-full py-2 gap-4 '>
     <div className='flex items-center gap-2 w-2/3'>
       <h3 className='text-2xl font-bold capitalize w-1/5'>Siswa Baru</h3>
@@ -68,10 +68,8 @@ const ValidationPage = () => {
     <TablePPDB />
   </div>
 </div>
-  
-  )
+    )
 }
-
 
 export const TablePPDB = () => {
   const [selectedIds, setSelectedIds] = useState<number[]>([])
@@ -155,4 +153,4 @@ export const TablePPDB = () => {
 }
 
 
-export default ValidationPage
+export default UserPage

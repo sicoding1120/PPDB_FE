@@ -14,6 +14,7 @@ import {
   TableRow
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
+import useDashboard from '@/hooks/use-dashboard'
 
 const DashboardPage = () => {
   const dataPenerimaanSiswa = [
@@ -21,24 +22,7 @@ const DashboardPage = () => {
     { name: 'Tidak lolos', value: 20, fill: '#EF4444' },
     { name: 'keluar', value: 20, fill: '#FCAA09' }
   ]
-  const dataPendaftaranPeserta = [
-    {
-      tgl: '25-04-2025',
-      jml_siswa: 60
-    },
-    {
-      tgl: '26-04-2025',
-      jml_siswa: 3
-    },
-    {
-      tgl: '27-04-2025',
-      jml_siswa: 20
-    },
-    {
-      tgl: '28-04-2025',
-      jml_siswa: 7
-    }
-  ]
+  
 
   const date = new Date()
 
@@ -48,6 +32,13 @@ const DashboardPage = () => {
     month: 'long',
     year: 'numeric'
   }).format(date)
+
+  const { useOverview} = useDashboard()
+  const { data, isLoading } = useOverview();
+
+
+  console.log("data overview", data);
+  console.log("isloading", isLoading);
 
   return (
     <section className='flex flex-col gap-8 h-full'>
@@ -61,19 +52,19 @@ const DashboardPage = () => {
           </div>
           <div className='grid grid-cols-4 gap-4 w-full mt-2'>
             <div className='w-full h-28 rounded-xl bg-white/90 flex flex-col justify-center p-4' data-aos="fade-up" data-aos-delay="200">
-              <Counter end={70} className={'font-bold text-5xl'} />
+              <Counter end={data?.studentCount} className={'font-bold text-5xl'} />
               <p className='capitalize text-lg'>Peserta PPDB</p>
             </div>
             <div className='w-full h-28 rounded-xl bg-white/90 flex flex-col justify-center p-4'data-aos="fade-up" data-aos-delay="300">
-              <Counter end={50} className={'font-bold text-5xl'} />
+              <Counter end={data?.studentSuccess} className={'font-bold text-5xl'} />
               <p className='capitalize text-lg'>Diterima</p>
             </div>
             <div className='w-full h-28 rounded-xl bg-white/90 flex flex-col justify-center p-4' data-aos="fade-up" data-aos-delay="400">
-              <Counter end={20} className={'font-bold text-5xl'} />
+              <Counter end={data?.studentFailed} className={'font-bold text-5xl'} />
               <p className='capitalize text-lg'>Tidak Diterima</p>
             </div>
             <div className='w-full h-28 rounded-xl bg-white/90 flex flex-col justify-center p-4' data-aos="fade-up" data-aos-delay="500">
-              <Counter end={0} className={'font-bold text-5xl'} />
+              <Counter end={data?.studentOut || 0} className={'font-bold text-5xl'} />
               <p className='capitalize text-lg'>Keluar</p>
             </div>
           </div>
@@ -108,7 +99,7 @@ const DashboardPage = () => {
         </div>
         <div className='w-1/2 h-full bg-white rounded-xl p-4 flex flex-col gap-4' data-aos="fade-in">
           <h3 className='text-2xl font-bold capitalize' data-aos="fade-right">pendaftaran peserta</h3>
-          <DashedChart data={dataPendaftaranPeserta} />
+          <DashedChart data={data?.history} />
         </div>
       </div>
       <div className='w-full h-64  flex gap-4 items-center justify-between' >

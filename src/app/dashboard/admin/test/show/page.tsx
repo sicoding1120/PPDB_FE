@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+import React, { useState } from 'react'
+
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -19,11 +21,9 @@ import {
   TableRow
 } from '@/components/ui/table'
 import { siswaData } from '@/data/siswa'
-
-import React, { useState } from 'react'
 import { CiSearch } from 'react-icons/ci'
 
-const FormPPDB = () => {
+const ShowResultPage = () => {
   return (
     <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2'>
       <div className='flex justify-between items-center w-full h-full py-2 gap-4 '>
@@ -69,6 +69,7 @@ const FormPPDB = () => {
     </div>
   )
 }
+
 export const TablePPDB = () => {
   const [selectedIds, setSelectedIds] = useState<number[]>([])
 
@@ -87,7 +88,7 @@ export const TablePPDB = () => {
   }
   const isAllSelected = selectedIds.length === siswaData.length
 
-  console.log(selectedIds);
+  console.log(selectedIds)
 
   return (
     <Table>
@@ -150,4 +151,4 @@ export const TablePPDB = () => {
   )
 }
 
-export default FormPPDB
+export default ShowResultPage
