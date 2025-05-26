@@ -1,5 +1,7 @@
 
 'use client'
+import { useFormik, Form, FormikProvider, getIn } from "formik";
+import * as yup from "yup";
 import React from 'react'
 import Image from 'next/image'
 import { Poppins } from 'next/font/google'
@@ -16,12 +18,43 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card"
+import useAuthModule from '../lib'
+import { LoginPayload } from '../interface'
+import { register } from 'module'
+
+export const registerSchema = yup.object().shape({
+    email: yup
+        .string()
+        .nullable()
+        .default("")
+        .email("Gunakan format email")
+        .required("Wajib isi"),
+    password: yup
+        .string()
+        .nullable()
+        .default("")
+        .required("Wajib isi")
+        .min(8, "Minimal 8 karakater"),
+});
 
 const poppins = Poppins({
     subsets: ['latin'],
     weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 })
-export const Login = () => {
+const LoginPage = () => {
+    const { useLoginAdmin } = useAuthModule()
+    const { mutate, isPending } = useLoginAdmin()
+    const formik = useFormik<LoginPayload>({
+        initialValues: registerSchema.getDefault(),
+        validationSchema: registerSchema,
+        enableReinitialize: true,
+        onSubmit: (payload) => {
+            console.log(payload,'isi payload')
+            mutate(payload);
+        },
+    });
+    const { handleChange, handleSubmit, handleBlur, values, errors } = formik;
+
     return (
         <>
             <div className="w-full h-full flex">
@@ -45,39 +78,47 @@ export const Login = () => {
                             <p className={`text-2xl font-bold ${poppins.className} text-color1 `}>Login</p>
                             <p className={`${poppins.className} text-gray-400`}>Silahkan Login Dengan Akun Anda!</p>
                         </div>
-                        <div className="w-full space-y-3">
-                            <Label htmlFor="email">Email</Label>
-                            <Input type="email" id="email" placeholder="Email" />
-                        </div>
-                        <div className="w-full space-y-3">
-                            <Label htmlFor="password">Password</Label>
-                            <Input type="password" id="password" placeholder="Password" />
-                            <div className="">
-                                <HoverCard>
-                                    <HoverCardTrigger asChild>
-                                        <Button variant="link" className={`${poppins.className} text-xs text-gray-500 font-light`}>Lupa Password ?</Button>
-                                    </HoverCardTrigger>
-                                    <HoverCardContent className="w-80">
-                                        <div className="flex justify-between space-x-4">
-                                            <Avatar>
-                                                <AvatarImage src="https://github.com/vercel.png" />
-                                                <AvatarFallback>VC</AvatarFallback>
-                                            </Avatar>
-                                            <div className="space-y-1">
-                                                <h4 className="text-sm font-semibold">@nextjs</h4>
-                                                <p className="text-sm">
-                                                    The React Framework – created and maintained by @vercel.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </HoverCardContent>
-                                </HoverCard>
-                            </div>
+                        <FormikProvider value={formik}>
+                            <Form onSubmit={handleSubmit} className="space-y-5">
+                                <div className="w-full space-y-3">
+                                    <Label htmlFor="email" >Email</Label>
+                                    <Input type="email" id="email" placeholder="Email" onChange={(e) => {
+                                        formik.setFieldValue('email', e.target.value)
+                                    }}/>
+                                </div>
+                                <div className="w-full space-y-3">
+                                    <Label htmlFor="password">Password</Label>
+                                    <Input type="password" id="password" placeholder="Password" onChange={(e) => {
+                                        formik.setFieldValue('password', e.target.value)
+                                    }}/>
+                                    <div className="">
+                                        <HoverCard>
+                                            <HoverCardTrigger asChild>
+                                                <Button variant="link" className={`${poppins.className} text-xs text-gray-500 font-light`}>Lupa Password ?</Button>
+                                            </HoverCardTrigger>
+                                            <HoverCardContent className="w-80">
+                                                <div className="flex justify-between space-x-4">
+                                                    <Avatar>
+                                                        <AvatarImage src="https://github.com/vercel.png" />
+                                                        <AvatarFallback>VC</AvatarFallback>
+                                                    </Avatar>
+                                                    <div className="space-y-1">
+                                                        <h4 className="text-sm font-semibold">@nextjs</h4>
+                                                        <p className="text-sm">
+                                                            The React Framework – created and maintained by @vercel.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </HoverCardContent>
+                                        </HoverCard>
+                                    </div>
 
-                            <div className="">
-                                <Button className={`${poppins.className} bg-login text-white hover:bg-color2 w-full`}>Login</Button>
-                            </div>
-                        </div>
+                                    <div className="">
+                                        <Button type="submit" className={`${poppins.className} bg-login text-white hover:bg-color2 w-full`}>Login</Button>
+                                    </div>
+                                </div>
+                            </Form>
+                        </FormikProvider>
                     </div>
                 </div>
             </div>
@@ -86,3 +127,4 @@ export const Login = () => {
 }
 
 
+export default LoginPage
