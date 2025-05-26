@@ -178,7 +178,7 @@ const StudentIdentity = () => {
         <div className='w-1/3 items-center flex gap-4 justify-end'>
           <div className='flex gap-2 items-center'>
             <span>Showing</span>
-            <Select>
+            <Select onValueChange={(e:any)=> setPageSize(parseInt(e))}>
               <SelectTrigger className='w-[80px] '>
                 <SelectValue placeholder='10' />
               </SelectTrigger>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import DashedChart from '@/components/dashed-chart'
 import CircleChart from '@/components/circle-chart'
@@ -15,6 +16,8 @@ import {
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
 import useDashboard from '@/hooks/use-dashboard'
+import { IoEyeSharp } from 'react-icons/io5'
+
 
 const DashboardPage = () => {
   const dataPenerimaanSiswa = [
@@ -53,19 +56,19 @@ const DashboardPage = () => {
           <div className='grid grid-cols-4 gap-4 w-full mt-2'>
             <div className='w-full h-28 rounded-xl bg-white/90 flex flex-col justify-center p-4' data-aos="fade-up" data-aos-delay="200">
               <Counter end={data?.studentCount} className={'font-bold text-5xl'} />
-              <p className='capitalize text-lg'>Peserta PPDB</p>
+              <p className='capitalize text-lg'>PPDB participants</p>
             </div>
             <div className='w-full h-28 rounded-xl bg-white/90 flex flex-col justify-center p-4'data-aos="fade-up" data-aos-delay="300">
               <Counter end={data?.studentSuccess} className={'font-bold text-5xl'} />
-              <p className='capitalize text-lg'>Diterima</p>
+              <p className='capitalize text-lg'>accepted</p>
             </div>
             <div className='w-full h-28 rounded-xl bg-white/90 flex flex-col justify-center p-4' data-aos="fade-up" data-aos-delay="400">
               <Counter end={data?.studentFailed} className={'font-bold text-5xl'} />
-              <p className='capitalize text-lg'>Tidak Diterima</p>
+              <p className='capitalize text-lg'>rejected</p>
             </div>
             <div className='w-full h-28 rounded-xl bg-white/90 flex flex-col justify-center p-4' data-aos="fade-up" data-aos-delay="500">
               <Counter end={data?.studentOut || 0} className={'font-bold text-5xl'} />
-              <p className='capitalize text-lg'>Keluar</p>
+              <p className='capitalize text-lg'>resign</p>
             </div>
           </div>
         </div>
@@ -118,163 +121,114 @@ const DashboardPage = () => {
         </div>
       </div>
       <div className='w-full h-full bg-white rounded-xl p-6 flex flex-col gap-6'data-aos="fade-up">
-        <h3 className='text-2xl font-bold capitalize'>kelola pendaftaran</h3>
-        <TablePendaftaran />
+        <h3 className='text-2xl font-bold capitalize'>Manage student count from school</h3>
+        <TableJSPS  data={data?.JSPS}/>
       </div>
       <div className='w-full h-full bg-white rounded-xl p-6 flex flex-col gap-6'data-aos="fade-up">
-        <h3 className='text-2xl font-bold capitalize'>kelola pembayaran</h3>
-        <TablePendaftaran />
+        <h3 className='text-2xl font-bold capitalize'>Manage student count from Major</h3>
+        <TableJSPM data={data?.JSPM}/>
+      </div>
+      <div className='w-full h-full bg-white rounded-xl p-6 flex flex-col gap-6'data-aos="fade-up">
+        <h3 className='text-2xl font-bold capitalize'>Manage student count from Orphan Status</h3>
+        <TableJSPOS data={data?.JSPS}/>
       </div>
     </section>
   )
 }
 
-export const TablePendaftaran = () => {
+export const TableJSPS = ({ data}:any) => {
   return (
     <Table>
       <TableHeader>
         <TableRow>
           <TableHead className='w-[30px]'>No</TableHead>
-          <TableHead className='w-[200px]'>Name</TableHead>
-          <TableHead className='w-[50px]'>Age</TableHead>
-          <TableHead className='w-[200px]'>School</TableHead>
-          <TableHead className='w-[200px]'>Action</TableHead>
+          <TableHead className='w-[200px]'>School Name</TableHead>
+          <TableHead className='w-[100px]'>Student Count</TableHead>
+          <TableHead className='w-[100px]'>Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell>1</TableCell>
-          <TableCell>Daffa Hafizh Firdaus</TableCell>
-          <TableCell>15</TableCell>
-          <TableCell>SMP MadinatulQuran</TableCell>
-          <TableCell className='flex gap-4 items-center'>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
-            >
-              Approve
-            </Button>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-blue-400 hover:bg-transparent hover:border-blue-400 hover:text-blue-400'
-            >
-              Edit
-            </Button>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-red-500 hover:bg-transparent hover:border-red-500 hover:text-red-500'
-            >
-              Delete
-            </Button>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>1</TableCell>
-          <TableCell>Daffa Hafizh Firdaus</TableCell>
-          <TableCell>15</TableCell>
-          <TableCell>SMP MadinatulQuran</TableCell>
-          <TableCell className='flex gap-4 items-center'>
-          <Button
-              variant={'default'}
-              className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
-            >
-              Approve
-            </Button>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-blue-400 hover:bg-transparent hover:border-blue-400 hover:text-blue-400'
-            >
-              Edit
-            </Button>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-red-500 hover:bg-transparent hover:border-red-500 hover:text-red-500'
-            >
-              Delete
-            </Button>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>1</TableCell>
-          <TableCell>Daffa Hafizh Firdaus</TableCell>
-          <TableCell>15</TableCell>
-          <TableCell>SMP MadinatulQuran</TableCell>
-          <TableCell className='flex gap-4 items-center'>
-          <Button
-              variant={'default'}
-              className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
-            >
-              Approve
-            </Button>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-blue-400 hover:bg-transparent hover:border-blue-400 hover:text-blue-400'
-            >
-              Edit
-            </Button>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-red-500 hover:bg-transparent hover:border-red-500 hover:text-red-500'
-            >
-              Delete
-            </Button>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>1</TableCell>
-          <TableCell>Daffa Hafizh Firdaus</TableCell>
-          <TableCell>15</TableCell>
-          <TableCell>SMP MadinatulQuran</TableCell>
-          <TableCell className='flex gap-4 items-center'>
-          <Button
-              variant={'default'}
-              className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
-            >
-              Approve
-            </Button>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-blue-400 hover:bg-transparent hover:border-blue-400 hover:text-blue-400'
-            >
-              Edit
-            </Button>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-red-500 hover:bg-transparent hover:border-red-500 hover:text-red-500'
-            >
-              Delete
-            </Button>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>1</TableCell>
-          <TableCell>Daffa Hafizh Firdaus</TableCell>
-          <TableCell>15</TableCell>
-          <TableCell>SMP MadinatulQuran</TableCell>
-          <TableCell className='flex gap-4 items-center'>
-          <Button
-              variant={'default'}
-              className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
-            >
-              Approve
-            </Button>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-blue-400 hover:bg-transparent hover:border-blue-400 hover:text-blue-400'
-            >
-              Edit
-            </Button>
-            <Button
-              variant={'default'}
-              className='border border-transparent bg-red-500 hover:bg-transparent hover:border-red-500 hover:text-red-500'
-            >
-              Delete
-            </Button>
-          </TableCell>
-        </TableRow>
+        {data && data.map((d: any, i: number) => (
+           <TableRow key={i}>
+            <TableCell>{i + 1}</TableCell>
+            <TableCell>{d?.schoolName}</TableCell>
+            <TableCell>{d?.studentCount}</TableCell>
+           <TableCell className='flex gap-4 items-center'>
+             <Button
+               variant={'default'}
+               className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
+             >
+                <IoEyeSharp />
+             </Button>
+           </TableCell>
+         </TableRow>
+        ))}
       </TableBody>
     </Table>
   )
 }
+export const TableJSPM = ({ data}:any) => {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className='w-[30px]'>No</TableHead>
+          <TableHead className='w-[200px]'>Major</TableHead>
+          <TableHead className='w-[100px]'>Student Count</TableHead>
+          <TableHead className='w-[100px]'>Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+      {data && data.map((d: any, i: number) => (
+           <TableRow key={i}>
+            <TableCell>{i + 1}</TableCell>
+            <TableCell>{d?.major}</TableCell>
+            <TableCell>{d?.studentCount}</TableCell>
+           <TableCell className='flex gap-4 items-center'>
+             <Button
+               variant={'default'}
+               className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
+             >
+                <IoEyeSharp />
+             </Button>
+           </TableCell>
+         </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
+export const TableJSPOS = ({ data}:any) => {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className='w-[30px]'>No</TableHead>
+          <TableHead className='w-[200px]'>OrphanStatus</TableHead>
+          <TableHead className='w-[100px]'>Student Count</TableHead>
+          <TableHead className='w-[100px]'>Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+      {data && data.map((d: any, i: number) => (
+           <TableRow key={i}>
+            <TableCell>{i + 1}</TableCell>
+            <TableCell>{d?.orphanStatus}</TableCell>
+            <TableCell>{d?.studentCount}</TableCell>
+           <TableCell className='flex gap-4 items-center'>
+             <Button
+               variant={'default'}
+               className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
+             >
+                <IoEyeSharp />
+             </Button>
+           </TableCell>
+         </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
+
 
 export default DashboardPage

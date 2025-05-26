@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/table'
 // import { siswaData } from '@/data/siswa'
 import { CiSearch } from 'react-icons/ci'
-import { FaTrash } from 'react-icons/fa'
+import { FaEdit, FaTrash } from 'react-icons/fa'
 import { IoEyeSharp } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
 
@@ -39,11 +39,38 @@ import {
   PaginationPrevious
 } from '@/components/ui/pagination'
 import DownloadExcelButton from '@/components/DownloadExcelBtn'
+import useTest from '@/hooks/use-test'
+import Swal from 'sweetalert2'
 
 export const TablePPDB = ({ data, isLoading }: any) => {
   const router = useRouter()
-  const { useDeleteStudent } = usePPDB()
-  const mutate = useDeleteStudent()
+
+  const { useCategoryTest } = useTest()
+    const { useDeleteCategoryTest } = useCategoryTest()
+    const mutate = useDeleteCategoryTest()
+
+  const handleDelete = async (id: string) => {
+    console.log(id);
+    const result = await Swal.fire({
+      title: 'are you sure ?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    })
+
+    if (result.isConfirmed == true) {
+         mutate.Delete(id)
+        // Swal.fire({
+        //     title: "Deleted!",
+        //     text: "Your file has been deleted.",
+        //     icon: "success",
+        //     confirmButtonText: "Close"
+        // })
+    }
+  }
 
   // const [selectedIds, setSelectedIds] = useState<string[]>([])
 
@@ -77,53 +104,41 @@ export const TablePPDB = ({ data, isLoading }: any) => {
               // checked={isAllSelected}
             />
           </TableHead>
-          <TableHead className='w-[30px]'>No</TableHead>
-          <TableHead className='w-[200px]'>Student Name</TableHead>
-          <TableHead className='w-[50px]'>Father name</TableHead>
-          <TableHead className='w-[200px]'>Father Job</TableHead>
-          <TableHead className='w-[200px]'>Mother Name</TableHead>
-          <TableHead className='w-[200px]'>Mother Job</TableHead>
-          <TableHead className='w-[200px]'>School</TableHead>
-          <TableHead className='w-[200px]'>Action</TableHead>
+          <TableHead className='w-[300px]'>No</TableHead>
+          <TableHead className='w-[6git branch
+            00px]'>Category Test Name</TableHead>
+          <TableHead className='w-[300px]'>Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {data &&
-          data.map((student: any, i: number) => {
+          data.map((ct: any, i: number) => {
             return (
               <TableRow key={i}>
                 <TableCell>
                   <input
                     type='checkbox'
                     title='Select Row'
-                    // checked={selectedIds.includes(student.id.toString())}
-                    // onChange={() => handleCheckboxChange(student.id.toString())}
+                    // checked={selectedIds.includes(ct.id.toString())}
+                    // onChange={() => handleCheckboxChange(ct.id.toString())}
                   />
                 </TableCell>
                 <TableCell>{i + 1}</TableCell>
-                <TableCell>{student?.fullName}</TableCell>
-                <TableCell>{student?.father?.name}</TableCell>
-                <TableCell>{student?.father?.job}</TableCell>
-                <TableCell>{student?.mother?.name}</TableCell>
-                <TableCell>{student?.mother?.job}</TableCell>
-                <TableCell>{student?.from_school}</TableCell>
+                <TableCell>{ct?.name}</TableCell>
+
                 <TableCell className='flex gap-4 items-center'>
                   <Button
                     variant='default'
-                    className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
-                    onClick={() =>
-                      router.push(
-                        `/dashboard/admin/parent-identity/${student.ID}`
-                      )
-                    }
+                    onClick={() => router.push(`/dashboard/admin/test/manage/category/${ct?.ID}/update`)}
+                    className='border border-transparent bg-blue-500 hover:bg-transparent hover:border-blue-500 hover:text-blue-500'
                   >
-                    <IoEyeSharp />
+                    <FaEdit />
                   </Button>
 
                   <Button
                     variant='default'
                     className='border border-transparent bg-red-500 hover:bg-transparent hover:border-red-500 hover:text-red-500'
-                    onClick={() => mutate.deleteStudent(student.ID)}
+                    onClick={() => handleDelete(ct?.ID)}
                   >
                     <FaTrash />
                   </Button>
@@ -143,12 +158,13 @@ const parentIdentity = () => {
 
   const [filter, setFilter] = useState([])
 
-  const { useParents } = usePPDB()
-  const { data = [], isLoading } = useParents()
+  const { useCategoryTest } = useTest()
+  const { useGetAllCategoryTest } = useCategoryTest()
+  const { data = [], isLoading } = useGetAllCategoryTest()
 
   console.log(data)
   console.log(isLoading)
-  console.log(pageSize);
+  console.log(pageSize)
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -156,12 +172,8 @@ const parentIdentity = () => {
     setPage(1) // reset ke page 1 saat search
   }
 
-  const filteredData = data.filter(
-    (s: any) =>
-      s?.father?.name?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
-      s?.father?.job?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
-      s?.mother?.job?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
-      s?.mother?.name?.toLowerCase().includes(searchTerm?.toLowerCase())
+  const filteredData = data?.filter((s: any) =>
+    s?.name?.toLowerCase().includes(searchTerm?.toLowerCase())
   )
 
   const totalPages = Math.ceil(filteredData.length / pageSize)
@@ -173,9 +185,7 @@ const parentIdentity = () => {
     <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2'>
       <div className='flex justify-between items-center w-full h-full py-2 gap-4 '>
         <div className='flex items-center gap-2 w-2/3'>
-          <h3 className='text-2xl font-bold capitalize w-1/4'>
-            student parents
-          </h3>
+          <h3 className='text-2xl font-bold capitalize w-1/4'>Category Test</h3>
           <div className='w-1/2 h-8 rounded-sm bg-black/5 px-2 gap-2 flex items-center ml-4'>
             <CiSearch size={22} />
             <input
@@ -190,12 +200,12 @@ const parentIdentity = () => {
         <div className='w-1/3 items-center flex gap-4 justify-end'>
           <div className='flex gap-2 items-center'>
             <span>Showing</span>
-            <Select onValueChange={(e) => setPageSize(parseInt(e))}>
-              <SelectTrigger className='w-[80px] ' >
+            <Select onValueChange={e => setPageSize(parseInt(e))}>
+              <SelectTrigger className='w-[80px] '>
                 <SelectValue placeholder='10' />
               </SelectTrigger>
-              <SelectContent className='outline-none border-1 border-slate-300' >
-                <SelectGroup >
+              <SelectContent className='outline-none border-1 border-slate-300'>
+                <SelectGroup>
                   <SelectLabel>Max fill</SelectLabel>
                   <SelectItem value='1'>1</SelectItem>
                   <SelectItem value='5'>5</SelectItem>

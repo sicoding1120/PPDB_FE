@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { axiosClient } from "@/lib/axiosCLient";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -25,7 +26,48 @@ const usePPDB = () => {
   const getDetailParent = async (id: string) => {
     return await axiosClient.get(`/student/parents/${id}`).then((r) => r.data);
   };
+  const getDocuments = async() => { 
+    return await axiosClient.get("/document").then(r=>r.data)
+  }
+  const SetChangeStatusDoc = async(payload:any) => {
+    return await axiosClient.put(`/document/update/${payload.id}`,payload.data).then(r=>r.data)
+  }
 
+  const useChangeStatusDoc = () => {
+    const { mutate: changeStatus } = useMutation({
+      mutationFn: (payload) => SetChangeStatusDoc(payload),
+      onSuccess: () => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+      onError: () => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Failed",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+    })
+
+    return {
+      changeStatus
+    }
+  }
+  const useGetDocument = () => {
+    const {data,isLoading} = useQuery({
+      queryFn: getDocuments,
+      queryKey: ["/document"],
+      select: (d) => d.data,
+    })
+    return {data,isLoading}
+}
   const useGetStudents = () => {
     const { data, isLoading } = useQuery({
       queryFn: getStudents,
@@ -72,7 +114,7 @@ const usePPDB = () => {
     });
     return { deleteStudent };
   };
-  return { useGetStudents, useParents, useGetDetailStudent, useDeleteStudent, useGetDetailParent };
+  return { useGetStudents, useParents, useGetDetailStudent, useDeleteStudent, useGetDetailParent, useGetDocument, useChangeStatusDoc };
 };
 
 export default usePPDB;
