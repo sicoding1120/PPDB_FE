@@ -11,11 +11,17 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@material-tailwind/react": "^2.1.10",
+<<<<<<< HEAD
     "@radix-ui/react-avatar": "^1.1.9",
     "@radix-ui/react-collapsible": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.13",
     "@radix-ui/react-select": "^2.2.4",
     "@radix-ui/react-separator": "^1.1.6",
+=======
+    "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-hover-card": "^1.1.14",
+    "@radix-ui/react-label": "^2.1.7",
+>>>>>>> df49f9003e1ae470553e615900cf0afae65aa87e
     "@radix-ui/react-slot": "^1.2.2",
     "@radix-ui/react-tooltip": "^1.2.6",
     "@tanstack/react-query": "^5.76.1",
@@ -29,6 +35,7 @@
     "formik": "^2.4.6",
     "lucide-react": "^0.510.0",
     "next": "15.3.2",
+    "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-fast-marquee": "^1.6.5",
@@ -41,7 +48,11 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+<<<<<<< HEAD
     "@types/file-saver": "^2.0.7",
+=======
+    "@types/next-auth": "^3.13.0",
+>>>>>>> df49f9003e1ae470553e615900cf0afae65aa87e
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
