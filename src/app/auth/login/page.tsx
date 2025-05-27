@@ -1,10 +1,8 @@
 
 'use client'
 import { useFormik, Form, FormikProvider} from "formik";
-import * as yup from "yup";
 import React from 'react'
 import Image from 'next/image'
-import { Poppins } from 'next/font/google'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
@@ -20,32 +18,17 @@ import {
 } from "@/components/ui/hover-card"
 import useAuthModule from '../lib'
 import { LoginPayload } from '../interface'
+import { LoginSchema } from "../schema/login";
 
-export const registerSchema = yup.object().shape({
-    email: yup
-        .string()
-        .nullable()
-        .default("")
-        .email("Gunakan format email")
-        .required("Wajib isi"),
-    password: yup
-        .string()
-        .nullable()
-        .default("")
-        .required("Wajib isi")
-        .min(8, "Minimal 8 karakater"),
-});
 
-const poppins = Poppins({
-    subsets: ['latin'],
-    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-})
+
+
 const LoginPage = () => {
     const { useLoginAdmin } = useAuthModule()
     const { mutate } = useLoginAdmin()
     const formik = useFormik<LoginPayload>({
-        initialValues: registerSchema.getDefault(),
-        validationSchema: registerSchema,
+        initialValues: LoginSchema.getDefault(),
+        validationSchema: LoginSchema,
         enableReinitialize: true,
         onSubmit: (payload) => {
             console.log(payload,'isi payload')
@@ -71,11 +54,11 @@ const LoginPage = () => {
                 <div className="w-[70%] h-screen p-32">
                     <div className="w-full h-full flex flex-col justify-center bg-white space-y-10">
                         <div className="flex justify-center items-center">
-                            <p className={`text-3xl font-semibold ${poppins.className} text-color1`}>Welcome Back Admin!</p>
+                            <p className={`text-3xl font-semibold  text-color1`}>Welcome Back Admin!</p>
                         </div>
                         <div className="space-y-2">
-                            <p className={`text-2xl font-bold ${poppins.className} text-color1 `}>Login</p>
-                            <p className={`${poppins.className} text-gray-400`}>Silahkan Login Dengan Akun Anda!</p>
+                            <p className={`text-2xl font-bold  text-color1 `}>Login</p>
+                            <p className={` text-gray-400`}>Silahkan Login Dengan Akun Anda!</p>
                         </div>
                         <FormikProvider value={formik}>
                             <Form onSubmit={formik.handleSubmit} className="space-y-5">
@@ -93,7 +76,7 @@ const LoginPage = () => {
                                     <div className="">
                                         <HoverCard>
                                             <HoverCardTrigger asChild>
-                                                <Button variant="link" className={`${poppins.className} text-xs text-gray-500 font-light`}>Lupa Password ?</Button>
+                                                <Button variant="link" className={` text-xs text-gray-500 font-light`}>Lupa Password ?</Button>
                                             </HoverCardTrigger>
                                             <HoverCardContent className="w-80">
                                                 <div className="flex justify-between space-x-4">
@@ -103,8 +86,8 @@ const LoginPage = () => {
                                                     </Avatar>
                                                     <div className="space-y-1">
                                                         <h4 className="text-sm font-semibold">Lupa Passoword ?</h4>
-                                                        <p className={`text-sm ${poppins.className}`}>
-                                                            Segera Hubungi <span className={`font-semibold ${poppins.className}`}>Project Manager</span> Untuk Mendapatkan Password.
+                                                        <p className={`text-sm `}>
+                                                            Segera Hubungi <span className={`font-semibold `}>Project Manager</span> Untuk Mendapatkan Password.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -113,7 +96,7 @@ const LoginPage = () => {
                                     </div>
 
                                     <div className="">
-                                        <Button type="submit" className={`${poppins.className} bg-login text-white hover:bg-color2 w-full`}>Login</Button>
+                                        <Button type="submit" className={` bg-login text-white hover:bg-color2 w-full`}>Login</Button>
                                     </div>
                                 </div>
                             </Form>
