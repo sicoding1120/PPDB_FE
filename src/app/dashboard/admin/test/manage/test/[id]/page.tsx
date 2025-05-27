@@ -75,7 +75,7 @@ const DetailTestPage = ({ params }: { params: Promise<{ id: string }> }) => {
 
   const changeWeightNewQs = (i: any,f:any, e: any) => {
     const update = [...newQs]
-    update[i][f] = e
+    update[i][f] = Number(e)
     setNewQS(update)
   }
 
