@@ -99,13 +99,13 @@ const LoginPage = () => {
                                             <HoverCardContent className="w-80">
                                                 <div className="flex justify-between space-x-4">
                                                     <Avatar>
-                                                        <AvatarImage src="https://github.com/vercel.png" />
+                                                        <AvatarImage src="https://i.pinimg.com/736x/94/75/64/9475646481868f0dffd9bfd73ad2fabe.jpg" />
                                                         <AvatarFallback>VC</AvatarFallback>
                                                     </Avatar>
                                                     <div className="space-y-1">
-                                                        <h4 className="text-sm font-semibold">@nextjs</h4>
-                                                        <p className="text-sm">
-                                                            The React Framework – created and maintained by @vercel.
+                                                        <h4 className="text-sm font-semibold">Lupa Passoword ?</h4>
+                                                        <p className={`text-sm ${poppins.className}`}>
+                                                            Segera Hubungi <span className={`font-semibold ${poppins.className}`}>Project Manager</span> Untuk Mendapatkan Password.
                                                         </p>
                                                     </div>
                                                 </div>
