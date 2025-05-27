@@ -39,7 +39,7 @@ import {
 } from '@/components/ui/pagination'
 import { siswaData } from '@/data/siswa'
 
-export const TablePPDB = ({ data, isLoading }: any) => {
+ const TablePPDB = ({ data, isLoading }: any) => {
   const router = useRouter()
   const { useDeleteStudent } = usePPDB()
   const mutate = useDeleteStudent()

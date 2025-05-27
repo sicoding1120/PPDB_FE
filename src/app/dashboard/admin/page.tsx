@@ -136,7 +136,7 @@ const DashboardPage = () => {
   )
 }
 
-export const TableJSPS = ({ data}:any) => {
+ const TableJSPS = ({ data}:any) => {
   return (
     <Table>
       <TableHeader>
@@ -167,7 +167,7 @@ export const TableJSPS = ({ data}:any) => {
     </Table>
   )
 }
-export const TableJSPM = ({ data}:any) => {
+ const TableJSPM = ({ data}:any) => {
   return (
     <Table>
       <TableHeader>
@@ -198,7 +198,7 @@ export const TableJSPM = ({ data}:any) => {
     </Table>
   )
 }
-export const TableJSPOS = ({ data}:any) => {
+const TableJSPOS = ({ data}:any) => {
   return (
     <Table>
       <TableHeader>

@@ -70,7 +70,7 @@ const ShowResultPage = () => {
   )
 }
 
-export const TablePPDB = () => {
+const TablePPDB = () => {
   const [selectedIds, setSelectedIds] = useState<number[]>([])
 
   const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {

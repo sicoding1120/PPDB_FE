@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import React, { useState } from 'react'
@@ -22,32 +20,29 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-// import { siswaData } from '@/data/siswa'
 import { CiSearch } from 'react-icons/ci'
-import { FaEdit, FaEye, FaPlusCircle, FaTrash } from 'react-icons/fa'
-import { IoEyeSharp } from 'react-icons/io5'
+import { FaEdit, FaEye, FaTrash } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 
-import usePPDB from '@/hooks/use-fromPPDB'
 import {
   Pagination,
   PaginationContent,
-  // PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination'
-import DownloadExcelButton from '@/components/DownloadExcelBtn'
 import useTest from '@/hooks/use-test'
 import Swal from 'sweetalert2'
+import DialogComponents from '@/components/dialogComponents'
 
-export const TablePPDB = ({ data, isLoading }: any) => {
+const TablePPDB = ({ data }: any) => {
   const router = useRouter()
 
-  // const { useCategoryTest } = useTest()
-  // const { useDeleteCategoryTest } = useCategoryTest()
-  // const mutate = useDeleteCategoryTest()
+  const { useTestApi } = useTest()
+  const { useUpdateTest, useDeleteTest } = useTestApi()
+  const { deleteTestFn } = useDeleteTest()
+  const { update } = useUpdateTest()
 
   const handleDelete = async (id: string) => {
     console.log(id)
@@ -62,33 +57,35 @@ export const TablePPDB = ({ data, isLoading }: any) => {
     })
 
     if (result.isConfirmed == true) {
-      // mutate.Delete(id)
-      // Swal.fire({
-      //     title: "Deleted!",
-      //     text: "Your file has been deleted.",
-      //     icon: "success",
-      //     confirmButtonText: "Close"
-      // })
+      deleteTestFn(id)
     }
   }
+  const handleUpdate = async (id: string) => {
+    const result = await Swal.fire({
+      title: 'update test',
+      input: 'text',
+      inputLabel: 'Enter new title',
+      inputPlaceholder: 'New title',
+      showCancelButton: true,
+      confirmButtonText: 'Update',
+      preConfirm: value => {
+        if (!value) {
+          Swal.showValidationMessage('Title is required')
+        }
+        return value
+      }
+    })
 
-  // const [selectedIds, setSelectedIds] = useState<string[]>([])
-
-  // const handleSelectAll = () => {
-  //   if (selectedIds.length === data.length) {
-  //     setSelectedIds([])
-  //   } else {
-  //     setSelectedIds(data.map((student: any) => student?.id?.toString()))
-  //   }
-  // }
-
-  // const handleCheckboxChange = (id: string) => {
-  //   setSelectedIds(prev =>
-  //     prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-  //   )
-  // }
-
-  // const isAllSelected = selectedIds.length === data.length
+    if (result.isConfirmed == true && result.value) {
+      console.log(result.value)
+      await update({
+        id: id,
+        data: {
+          title: result.value
+        }
+      })
+    }
+  }
 
   return data?.length == 0 ? (
     <div>No data available</div>
@@ -96,14 +93,6 @@ export const TablePPDB = ({ data, isLoading }: any) => {
     <Table className='h-3/4 overflow-y-auto'>
       <TableHeader>
         <TableRow>
-          <TableHead className='w-[30px]'>
-            <input
-              type='checkbox'
-              title='Select All'
-              // onChange={handleSelectAll}
-              // checked={isAllSelected}
-            />
-          </TableHead>
           <TableHead className='w-[50px]'>No</TableHead>
           <TableHead className='w-[200px]'>ID</TableHead>
           <TableHead className='w-[200px]'>Test Name</TableHead>
@@ -118,14 +107,6 @@ export const TablePPDB = ({ data, isLoading }: any) => {
           data.map((t: any, i: number) => {
             return (
               <TableRow key={i}>
-                <TableCell>
-                  <input
-                    type='checkbox'
-                    title='Selet Row'
-                    // checked={seletedIds.includes(t.id.toString())}
-                    // onChange={() => handleCheckboxChange(t.id.toString())}
-                  />
-                </TableCell>
                 <TableCell>{i + 1}</TableCell>
                 <TableCell>{t?.ID}</TableCell>
                 <TableCell>{t?.title}</TableCell>
@@ -137,9 +118,7 @@ export const TablePPDB = ({ data, isLoading }: any) => {
                   <Button
                     variant='default'
                     onClick={() =>
-                      router.push(
-                        `/dashboard/admin/test/manage/test/${t?.ID}`
-                      )
+                      router.push(`/dashboard/admin/test/manage/test/${t?.ID}`)
                     }
                     className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
                   >
@@ -147,11 +126,7 @@ export const TablePPDB = ({ data, isLoading }: any) => {
                   </Button>
                   <Button
                     variant='default'
-                    onClick={() =>
-                      router.push(
-                        `/dashboard/admin/test/manage/test/${t?.ID}/update`
-                      )
-                    }
+                    onClick={async () => await handleUpdate(t?.ID)}
                     className='border border-transparent bg-blue-500 hover:bg-transparent hover:border-blue-500 hover:text-blue-500'
                   >
                     <FaEdit />
@@ -177,22 +152,17 @@ const ShowTest = () => {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [searchTerm, setSearchTerm] = useState('')
-  const [ctQuestion, setCtq] = useState('')
-  console.log(ctQuestion)
 
-  const router = useRouter()
+  // const router = useRouter()
 
-  const [filter, setFilter] = useState([])
   const { useTestApi } = useTest()
   const { useGetAllTest } = useTestApi()
   const { data, isLoading } = useGetAllTest()
-  // const { useGetAllCategoryTest } = useCategoryTest()
-  // const { data = [], isLoading } = useGetAllCategoryTest()
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setSearchTerm(value)
-    setPage(1) // reset ke page 1 saat search
+    setPage(1)
   }
 
   const filteredData = data?.filter((s: any) =>
@@ -243,7 +213,7 @@ const ShowTest = () => {
             </Select>
           </div>
           {/* <DownloadExcelButton dataRandom={data} dataName={'Questions'} /> */}
-          <Button
+          {/* <Button
             className='flex justify-center items-center gap-2 capitalize bg-green-500 text-white px-6 py-2 w-1/3'
             onClick={() =>
               router.push('/dashboard/admin/test/manage/test/create')
@@ -251,7 +221,8 @@ const ShowTest = () => {
           >
             <FaPlusCircle />
             Test
-          </Button>
+          </Button> */}
+          <DialogComponents variant='createTest' />
         </div>
       </div>
       <div className='w-full h-[82vh] bg-white rounded-xl p-4 flex flex-col  justify-between'>

@@ -12,7 +12,7 @@ import {
   SelectItem,
   SelectValue,
   SelectGroup,
-  SelectLabel
+  
 } from '@/components/ui/select'
 import { FaPlusCircle, FaTrashAlt } from 'react-icons/fa'
 import useTest from '@/hooks/use-test'
@@ -85,8 +85,8 @@ const CreateQuestionPage = () => {
 
   const handleQuestionChange = (index: any, field: any, value: any) => {
     const updated = [...questions]
-    updated[index][field] = value
-    setQuestions(updated)
+    updated[index]["text"] = value
+    // setQuestions(updated)
   }
 
   const handleOptionChange = (qIdx: any, optIdx: any, value: any) => {
@@ -230,7 +230,7 @@ const CreateQuestionPage = () => {
       ))}
 
       <Card
-        onClick={addQuestion}
+        // onClick={addQuestion}
         className='cursor-pointer hover:bg-green-100 transition-colors duration-200 border border-green-500 text-green-700 flex justify-center items-center py-6'
       >
         <CardContent className='flex items-center justify-center gap-2 text-green-600'>

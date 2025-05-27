@@ -42,7 +42,7 @@ import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import usePaymentAPI from '@/hooks/use-payment'
 
-export const TablePPDB = ({ data, isLoading }: any) => {
+ const TablePPDB = ({ data, isLoading }: any) => {
   const router = useRouter()
   const { useUpdateTransaction } = usePaymentAPI()
   const mutate = useUpdateTransaction()

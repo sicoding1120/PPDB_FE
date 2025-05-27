@@ -42,7 +42,7 @@ import DownloadExcelButton from '@/components/DownloadExcelBtn'
 import useTest from '@/hooks/use-test'
 import Swal from 'sweetalert2'
 
-export const TablePPDB = ({ data, isLoading }: any) => {
+const TablePPDB = ({ data, isLoading }: any) => {
   const router = useRouter()
 
   // const { useCategoryTest } = useTest()

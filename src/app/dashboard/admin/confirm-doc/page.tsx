@@ -41,7 +41,7 @@ import { siswaData } from '@/data/siswa'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 
-export const TablePPDB = ({ data, isLoading }: any) => {
+ const TablePPDB = ({ data, isLoading }: {data:any, isLoading:boolean}) => {
   const router = useRouter()
   const { useChangeStatusDoc } = usePPDB();
   const mutate = useChangeStatusDoc();

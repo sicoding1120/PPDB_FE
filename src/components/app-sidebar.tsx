@@ -49,7 +49,7 @@ export function AppSidebar () {
       <OverviewSection />
       <ManagePPDBSection />
       <VerificationPaymentSection />
-      <SelectionPPDB />
+      {/* <SelectionPPDB /> */}
       <PublishPPDB />
       <User />
       <SidebarFooter />
@@ -100,11 +100,11 @@ export const ManagePPDBSection = () => {
                   Student Identity
                 </SidebarMenuSubItem>
               </Link>
-              <Link href={'/dashboard/admin/parent-identity'}>
+              {/* <Link href={'/dashboard/admin/parent-identity'}>
                 <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
                   Parent Identity
                 </SidebarMenuSubItem>
-              </Link>
+              </Link> */}
               <Link href={'/dashboard/admin/confirm-doc'}>
                 <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
                   Confirm Doc
@@ -177,6 +177,7 @@ export const PublishPPDB = () => {
     <SidebarMenu className='mt-2'>
       <Collapsible defaultOpen className='group/collapsible'>
         <SidebarMenuItem>
+          
           <CollapsibleTrigger asChild>
             <SidebarMenuButton
               className='flex items-center justify-between w-full text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'
@@ -195,6 +196,11 @@ export const PublishPPDB = () => {
           </CollapsibleTrigger>
           <CollapsibleContent>
             <SidebarMenuSub>
+            <Link href='/dashboard/admin/test/publish'>
+                <SidebarMenuSubItem className='text-sm py-1 px-2 hover:bg-green-500/10 mt-2'>
+                  Statistic
+                </SidebarMenuSubItem>
+              </Link>
               {/* Category Submenu */}
               <Collapsible className='group'>
                 <SidebarMenuSubItem>
@@ -262,7 +268,7 @@ export const PublishPPDB = () => {
                 </SidebarMenuSubItem>
               </Collapsible>
               {/* Question Submenu */}
-              <Collapsible className='group'>
+              {/* <Collapsible className='group'>
                 <SidebarMenuSubItem>
                   <CollapsibleTrigger asChild>
                     <SidebarMenuButton
@@ -293,7 +299,7 @@ export const PublishPPDB = () => {
                     </Link>
                   </CollapsibleContent>
                 </SidebarMenuSubItem>
-              </Collapsible>
+              </Collapsible> */}
               {/* Publish Test Result */}
               <Link href='/dashboard/admin/test/publish'>
                 <SidebarMenuSubItem className='text-sm py-1 px-2 hover:bg-green-500/10 mt-2'>
