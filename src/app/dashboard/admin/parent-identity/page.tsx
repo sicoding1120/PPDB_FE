@@ -40,7 +40,7 @@ import {
 } from '@/components/ui/pagination'
 import DownloadExcelButton from '@/components/DownloadExcelBtn'
 
-export const TablePPDB = ({ data, isLoading }: any) => {
+ const TablePPDB = ({ data, isLoading }: any) => {
   const router = useRouter()
   const { useDeleteStudent } = usePPDB()
   const mutate = useDeleteStudent()
@@ -101,12 +101,12 @@ export const TablePPDB = ({ data, isLoading }: any) => {
                   />
                 </TableCell>
                 <TableCell>{i + 1}</TableCell>
-                <TableCell>{student.fullName}</TableCell>
-                <TableCell>{student.father.name}</TableCell>
-                <TableCell>{student.father.job}</TableCell>
-                <TableCell>{student.mother.name}</TableCell>
-                <TableCell>{student.mother.job}</TableCell>
-                <TableCell>{student.from_school}</TableCell>
+                <TableCell>{student?.fullName}</TableCell>
+                <TableCell>{student?.father?.name}</TableCell>
+                <TableCell>{student?.father?.job}</TableCell>
+                <TableCell>{student?.mother?.name}</TableCell>
+                <TableCell>{student?.mother?.job}</TableCell>
+                <TableCell>{student?.from_school}</TableCell>
                 <TableCell className='flex gap-4 items-center'>
                   <Button
                     variant='default'
@@ -158,10 +158,10 @@ const parentIdentity = () => {
 
   const filteredData = data.filter(
     (s: any) =>
-      s.father.name?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
-      s.father.job?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
-      s.mother.job?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
-      s.mother.name?.toLowerCase().includes(searchTerm?.toLowerCase())
+      s?.father?.name?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      s?.father?.job?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      s?.mother?.job?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      s?.mother?.name?.toLowerCase().includes(searchTerm?.toLowerCase())
   )
 
   const totalPages = Math.ceil(filteredData.length / pageSize)

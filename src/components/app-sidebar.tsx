@@ -28,7 +28,7 @@ import Image from 'next/image'
 
 export function AppSidebar () {
   return (
-    <Sidebar className='border-slate-300 b px-2'>
+    <Sidebar className='border-slate-300  px-2  '>
       <SidebarHeader>
         <SidebarGroup className='mb-4'>
           <div className='flex items-center'>
@@ -45,13 +45,15 @@ export function AppSidebar () {
           </div>
         </SidebarGroup>
       </SidebarHeader>
+      <div className='flex flex-col overflow-y-auto mb-8'>
       <OverviewSection />
       <ManagePPDBSection />
       <VerificationPaymentSection />
-      <SelectionPPDB />
+      {/* <SelectionPPDB /> */}
       <PublishPPDB />
       <User />
       <SidebarFooter />
+      </div>
     </Sidebar>
   )
 }
@@ -98,11 +100,11 @@ export const ManagePPDBSection = () => {
                   Student Identity
                 </SidebarMenuSubItem>
               </Link>
-              <Link href={'/dashboard/admin/parent-identity'}>
+              {/* <Link href={'/dashboard/admin/parent-identity'}>
                 <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
                   Parent Identity
                 </SidebarMenuSubItem>
-              </Link>
+              </Link> */}
               <Link href={'/dashboard/admin/confirm-doc'}>
                 <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
                   Confirm Doc
@@ -175,6 +177,7 @@ export const PublishPPDB = () => {
     <SidebarMenu className='mt-2'>
       <Collapsible defaultOpen className='group/collapsible'>
         <SidebarMenuItem>
+          
           <CollapsibleTrigger asChild>
             <SidebarMenuButton
               className='flex items-center justify-between w-full text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'
@@ -193,12 +196,114 @@ export const PublishPPDB = () => {
           </CollapsibleTrigger>
           <CollapsibleContent>
             <SidebarMenuSub>
-              <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
-                <Link href={'/dashboard/admin/test/show'}>show</Link>
-              </SidebarMenuSubItem>
-              <Link href={'/dashboard/admin/test/publish'}>
-                <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
-                  publish
+            <Link href='/dashboard/admin/test/publish'>
+                <SidebarMenuSubItem className='text-sm py-1 px-2 hover:bg-green-500/10 mt-2'>
+                  Statistic
+                </SidebarMenuSubItem>
+              </Link>
+              {/* Category Submenu */}
+              <Collapsible className='group'>
+                <SidebarMenuSubItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      className='flex items-center justify-between w-full text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'
+                      data-collapsible-trigger
+                    >
+                      <div className='flex gap-2 items-center'>
+                        <PiHandSwipeRight />
+                        <span>Category</span>
+                      </div>
+
+                      <ChevronRight
+                        className='h-4 w-4 transition-transform duration-200'
+                        data-collapsible-icon
+                      />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className='pl-4'>
+                    <Link href='/dashboard/admin/test/manage/category/show'>
+                      <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
+                        Show Category
+                      </SidebarMenuSubItem>
+                    </Link>
+                    <Link href='/dashboard/admin/test/manage/category/create'>
+                      <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
+                        Create Category
+                      </SidebarMenuSubItem>
+                    </Link>
+                  </CollapsibleContent>
+                </SidebarMenuSubItem>
+              </Collapsible>
+              {/* Test Submenu */}
+              <Collapsible className='group'>
+                <SidebarMenuSubItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      className='flex items-center justify-between w-full text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'
+                      data-collapsible-trigger
+                    >
+                      <div className='flex gap-2 items-center'>
+                        <PiHandSwipeRight />
+                        <span>Test</span>
+                      </div>
+
+                      <ChevronRight
+                        className='h-4 w-4 transition-transform duration-200'
+                        data-collapsible-icon
+                      />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className='pl-4'>
+                    <Link href='/dashboard/admin/test/manage/test/show'>
+                      <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
+                        Show Test
+                      </SidebarMenuSubItem>
+                    </Link>
+                    <Link href='/dashboard/admin/test/manage/test/create'>
+                      <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
+                        Create Test
+                      </SidebarMenuSubItem>
+                    </Link>
+                  </CollapsibleContent>
+                </SidebarMenuSubItem>
+              </Collapsible>
+              {/* Question Submenu */}
+              {/* <Collapsible className='group'>
+                <SidebarMenuSubItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      className='flex items-center justify-between w-full text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'
+                      data-collapsible-trigger
+                    >
+                      <div className='flex gap-2 items-center'>
+                        <PiHandSwipeRight />
+                        <span>Question</span>
+                      </div>
+
+                      <ChevronRight
+                        className='h-4 w-4 transition-transform duration-200'
+                        data-collapsible-icon
+                      />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className='pl-4'>
+                    <Link href='/dashboard/admin/test/manage/question/show'>
+                      <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
+                        Show Questions
+                      </SidebarMenuSubItem>
+                    </Link>
+                    <Link href='/dashboard/admin/test/manage/question/create'>
+                      <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
+                        Create Question
+                      </SidebarMenuSubItem>
+                    </Link>
+                  </CollapsibleContent>
+                </SidebarMenuSubItem>
+              </Collapsible> */}
+              {/* Publish Test Result */}
+              <Link href='/dashboard/admin/test/publish'>
+                <SidebarMenuSubItem className='text-sm py-1 px-2 hover:bg-green-500/10 mt-2'>
+                  Publish Result Test
                 </SidebarMenuSubItem>
               </Link>
             </SidebarMenuSub>
