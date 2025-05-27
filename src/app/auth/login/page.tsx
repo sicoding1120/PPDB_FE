@@ -1,6 +1,6 @@
 
 'use client'
-import { useFormik, Form, FormikProvider, getIn } from "formik";
+import { useFormik, Form, FormikProvider} from "formik";
 import * as yup from "yup";
 import React from 'react'
 import Image from 'next/image'
@@ -20,7 +20,6 @@ import {
 } from "@/components/ui/hover-card"
 import useAuthModule from '../lib'
 import { LoginPayload } from '../interface'
-import { register } from 'module'
 
 export const registerSchema = yup.object().shape({
     email: yup
@@ -43,7 +42,7 @@ const poppins = Poppins({
 })
 const LoginPage = () => {
     const { useLoginAdmin } = useAuthModule()
-    const { mutate, isPending } = useLoginAdmin()
+    const { mutate } = useLoginAdmin()
     const formik = useFormik<LoginPayload>({
         initialValues: registerSchema.getDefault(),
         validationSchema: registerSchema,
@@ -53,7 +52,7 @@ const LoginPage = () => {
             mutate(payload);
         },
     });
-    const { handleChange, handleSubmit, handleBlur, values, errors } = formik;
+    
 
     return (
         <>
@@ -79,7 +78,7 @@ const LoginPage = () => {
                             <p className={`${poppins.className} text-gray-400`}>Silahkan Login Dengan Akun Anda!</p>
                         </div>
                         <FormikProvider value={formik}>
-                            <Form onSubmit={handleSubmit} className="space-y-5">
+                            <Form onSubmit={formik.handleSubmit} className="space-y-5">
                                 <div className="w-full space-y-3">
                                     <Label htmlFor="email" >Email</Label>
                                     <Input type="email" id="email" placeholder="Email" onChange={(e) => {

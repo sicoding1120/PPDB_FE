@@ -1,13 +1,12 @@
-import useAxiosAuth from "@/hooks/use-axiosAuth";
 import { axiosClient } from "@/lib/axiosCLient";
-import { useRouter } from "next/navigation";
-import { LoginPayload, LoginResponse } from "../interface";
+// import { useRouter } from "next/navigation";
+import { LoginPayload} from "../interface";
 import { useMutation } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Cookie from "js-cookie";
 
 const useAuthModule = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
   const loginAdmin = async (payload: LoginPayload) => {
     return await axiosClient.post("/auth/admin/login", payload).then((res) => res.data);
@@ -30,7 +29,7 @@ const useAuthModule = () => {
         // router.push("/dashboard/admin");
 
       },
-      onError: (err: any) => {
+      onError: () => {
         // if (err.response.status === 422) {
         Swal.fire({
           icon: "error",

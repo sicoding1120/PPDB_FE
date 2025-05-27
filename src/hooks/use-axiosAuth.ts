@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { axiosClient } from "@/lib/axiosCLient";
 import { useSession, signOut } from "next-auth/react";
 import { useEffect } from "react";
@@ -19,7 +20,7 @@ const useAxiosAuth = () => {
  
     const responseIntercept = axiosClient.interceptors.response.use(
       async (response: any) => response,
-      async (error: any) => {
+      async () => {
         signOut();
         window.location.replace("/auth/login");
       }
