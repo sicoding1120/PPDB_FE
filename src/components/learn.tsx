@@ -15,7 +15,7 @@ export default function Learn() {
         <div className="flex flex-col w-full min-h-screen mt-28 space-y-16 px-4">
             {/* Heading */}
             <div className="flex flex-col justify-center items-center space-y-4 text-center">
-                <p className={`text-xs font-semibold ${poppins.className}`}>WHAT I LEARN ?</p>
+                <p className={`text-xs font-semibold ${poppins.className}`} id="About">WHAT I LEARN ?</p>
                 <p className={`text-2xl font-semibold ${poppins.className}`}>Pembelajaran Yang Di Sediakan</p>
                 <p className={`text-gray-500 max-w-2xl font-medium text-xs ${poppins.className}`}>
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, laboriosam, quam voluptas earum inventore nam asperiores corrupti, illum officiis unde ipsam laborum ut nostrum. Alias facilis incidunt aut tempora explicabo!

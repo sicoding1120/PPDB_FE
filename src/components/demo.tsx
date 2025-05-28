@@ -27,7 +27,7 @@ export default function Demo() {
                     data-aos-duration="1200"
                 >
                     {/* Bagian kiri */}
-                    <div className="flex relative ml-6 sm:ml-10 md:ml-14 lg:ml-0">
+                    <div className="flex relative ml-28 sm:ml-10 md:ml-14 lg:ml-0">
                         <Image src={'/assets/Mockup4.png'} width={220} height={220} alt="phone"
                             data-aos="zoom-in" data-aos-duration="1000"
                         />
@@ -90,7 +90,7 @@ export default function Demo() {
                     </div>
 
                     {/* Bagian kanan */}
-                    <div className="flex flex-col space-y-12" data-aos="fade-left" data-aos-duration="1200">
+                    <div className="flex flex-col space-y-12" data-aos="fade-left" data-aos-duration="1200" id="Features">
                         <div className="flex flex-col space-y-5 text-center lg:text-left"
                             data-aos="fade-left"
                             data-aos-delay="100"
