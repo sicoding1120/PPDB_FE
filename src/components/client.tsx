@@ -11,7 +11,7 @@ const poppins = Poppins({
 
 export default function Client () {
   return (
-    <div className='w-full flex flex-col justify-center items-center mt-40 space-y-12 mb-36 px-4 sm:px-8'>
+    <div className='w-full flex flex-col justify-center items-center mt-40 space-y-12 mb-36 px-4 sm:px-8' id='Survei'>
       {/* Title Section */}
       <div className='flex flex-col justify-center items-center space-y-6 text-center max-w-3xl'>
         <div className='w-10 h-10 bg-black rounded-md flex items-center justify-center'>

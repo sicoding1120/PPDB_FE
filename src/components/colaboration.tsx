@@ -15,7 +15,7 @@ export default function Colab() {
     <section className="w-full pt-10 bg-white">
       <h2 className={`text-sm font-semibold text-center mb-6 ${poppins.className}`}>Lebih dari <span className='font-bold text-green-600'>20+</span> academy partners</h2>
 
-      <div className="flex w-full justify-center items-center">
+      <div className="flex w-full justify-center items-center" id='Partners'>
         <Marquee
           gradient={false}
           speed={50}

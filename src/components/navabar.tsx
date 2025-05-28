@@ -39,18 +39,18 @@ export default function NavbarK() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-6 ml-10">
-            <Link href="/" className="text-gray-700 hover:text-green-600">Home</Link>
-            <Link href="/features" className="text-gray-700 hover:text-green-600">Features</Link>
-            <Link href="/pricing" className="text-gray-700 hover:text-green-600">Pricing</Link>
-            <Link href="/about" className="text-gray-700 hover:text-green-600">About</Link>
+            <Link href="#About" className="text-gray-700 hover:text-green-600">About</Link>
+            <Link href="#Patners" className="text-gray-700 hover:text-green-600">Patners</Link>
+            <Link href="#Features" className="text-gray-700 hover:text-green-600">Features</Link>
+            <Link href="#Survei" className="text-gray-700 hover:text-green-600">Survei</Link>
           </div>
 
           {/* Desktop Action */}
           <div className="hidden md:flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <Link href="/login" className="text-gray-700 hover:text-green-600"><Twitter className="w-5 h-5" /></Link>
-              <Link href="/login" className="text-gray-700 hover:text-green-600"><FaFacebook className="w-5 h-5" /></Link>
-              <Link href="/login" className="text-gray-700 hover:text-green-600"><Instagram className="w-5 h-5" /></Link>
+              <Link href="#" className="text-gray-700 hover:text-green-600"><Twitter className="w-5 h-5" /></Link>
+              <Link href="#" className="text-gray-700 hover:text-green-600"><FaFacebook className="w-5 h-5" /></Link>
+              <Link href="#" className="text-gray-700 hover:text-green-600"><Instagram className="w-5 h-5" /></Link>
             </div>
             <Button asChild variant={"custom"} className="px-4 py-2">
               <Link href="/install">Install</Link>
@@ -71,10 +71,10 @@ export default function NavbarK() {
         <div className={`md:hidden px-4 pb-4 pt-2 space-y-2 transition-all ${
           isScrolled ? 'bg-white/1 backdrop-blur-sm shadow-md' : 'bg-white shadow'
         }`}>
-          <Link href="/" className="block text-gray-700 hover:text-green-600">Home</Link>
-          <Link href="/features" className="block text-gray-700 hover:text-green-600">Features</Link>
-          <Link href="/pricing" className="block text-gray-700 hover:text-green-600">Pricing</Link>
-          <Link href="/about" className="block text-gray-700 hover:text-green-600">About</Link>
+          <Link href="#About" className="block text-gray-700 hover:text-green-600">About</Link>
+          <Link href="#Patners" className="block text-gray-700 hover:text-green-600">Patners</Link>
+          <Link href="#Features" className="block text-gray-700 hover:text-green-600">Features</Link>
+          <Link href="#Servei" className="block text-gray-700 hover:text-green-600">Survei</Link>
           <div className="flex gap-4 pt-2">
             <Link href="/login" className="text-gray-700 hover:text-green-600"><Twitter className="w-5 h-5" /></Link>
             <Link href="/login" className="text-gray-700 hover:text-green-600"><FaFacebook className="w-5 h-5" /></Link>
