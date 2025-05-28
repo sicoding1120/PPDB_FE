@@ -23,12 +23,12 @@ export default function Colab() {
           className="space-x-10 mt-2"
         >
           <Image src="/assets/Mickro.jpg" alt="Partner 1" className="h-12 w-40 mx-6" width={160} height={48} />
-          <Image src="/assets/Sisco.png" alt="Partner 2" className="h-12 w-36 mx-6" width={160} height={48} />
+          <Image src="/assets/Sisco.png" alt="Partner 2" className="h-[70px] w-20 mx-6" width={160} height={48} />
           <Image src="/assets/RedHat.png" alt="Partner 3" className="h-12 mx-6" width={160} height={48} />
           <Image src="/assets/ITC.png" alt="Partner 4" className="h-12 mx-6" width={160} height={48} />
           <Image src="/assets/PENS.png" alt="Partner 5" className="h-12 mx-6" width={160} height={48} />
           <Image src="/assets/Anabuki.png" alt="Partner 5" className="h-12 mx-6" width={160} height={48} />
-          <Image src="/assets/AWS.jpg" alt="Partner 5" className="h-12 mx-6" width={160} height={48} />
+          <Image src="/assets/AWS.jpg" alt="Partner 5" className="h-12 mx-6 mt-5" width={120} height={48} />
         </Marquee>
       </div>
     </section>

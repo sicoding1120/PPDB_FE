@@ -68,7 +68,9 @@ export default function NavbarK() {
 
       {/* Mobile Nav */}
       {isOpen && (
-        <div className="md:hidden px-4 pb-4 pt-2 space-y-2 bg-white shadow transition-all">
+        <div className={`md:hidden px-4 pb-4 pt-2 space-y-2 transition-all ${
+          isScrolled ? 'bg-white/1 backdrop-blur-sm shadow-md' : 'bg-white shadow'
+        }`}>
           <Link href="/" className="block text-gray-700 hover:text-green-600">Home</Link>
           <Link href="/features" className="block text-gray-700 hover:text-green-600">Features</Link>
           <Link href="/pricing" className="block text-gray-700 hover:text-green-600">Pricing</Link>

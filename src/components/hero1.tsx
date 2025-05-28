@@ -10,7 +10,7 @@ const poppins = Poppins({
 
 export default function Hero1() {
   return (
-    <div className="flex w-full h-screen bg-hero2 justify-center items-center overflow-hidden relative px-4">
+    <div className="flex w-full h-[95vh] bg-hero2 justify-center items-center overflow-hidden relative px-4">
       {/* Gradient atas */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none" />
 
@@ -48,10 +48,10 @@ export default function Hero1() {
         {/* Gambar Mockup */}
         <Image
           src="/assets/Mockup.png"
-          width={255}
-          height={255}
+          width={900}
+          height={900}
           alt="phone"
-          className="w-auto max-w-[80%] md:max-w-[255px]"
+          className="w-auto max-w-[80%] md:max-w-[255px] mt-20"
         />
 
         {/* Gradient bawah */}
