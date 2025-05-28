@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query"
 const useDashboard = () => {
 
     const getOverview = async () => {
-        return await axiosClient.get("/student/overview").then((r) => r.data)
+        return await axiosClient.get("/student/overview", {}).then((r) => r.data)
     }
 
     const useOverview = () => {

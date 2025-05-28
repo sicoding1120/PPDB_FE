@@ -37,11 +37,10 @@ const DashboardPage = () => {
   }).format(date)
 
   const { useOverview} = useDashboard()
-  const { data, isLoading } = useOverview();
+  const { data} = useOverview();
 
 
-  console.log("data overview", data);
-  console.log("isloading", isLoading);
+ 
 
   return (
     <section className='flex flex-col gap-8 h-full'>
