@@ -108,8 +108,8 @@ import { Badge } from '@/components/ui/badge'
                   />
                 </TableCell>
                 <TableCell>{i + 1}</TableCell>
-                <TableCell>{doc.student.fullName}</TableCell>
-                <TableCell>{doc.student.from_school}</TableCell>
+                <TableCell>{doc?.student == null ? "" :doc?.student?.fullName }</TableCell>
+                <TableCell>{doc?.student == null ? '' : doc?.student?.from_school }</TableCell>
                 <TableCell className='ellipsis'>
                   <Link href={doc.fatherKTP_url} className='text-blue-500'>
                     {doc.fatherKTP_url}

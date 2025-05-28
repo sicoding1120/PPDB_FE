@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { axiosClient } from "@/lib/axiosCLient";
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
@@ -140,8 +140,10 @@ const useTest = () => {
   };
 
   const useQuestionsTest = () => {
-    const updateQuestion = async (payload:any) => {
-      return await axiosClient.patch(`/questions/update/${payload.id}`, payload.dto).then(r=>r.data);
+    const updateQuestion = async (payload: any) => {
+      return await axiosClient
+        .patch(`/questions/update/${payload.id}`, payload.dto)
+        .then((r) => r.data);
     };
     const deleteQuestion = async (id: string) => {
       return await axiosClient
@@ -158,7 +160,7 @@ const useTest = () => {
     };
     const useUpdateQuestion = () => {
       const { mutate: updateQuestionFn } = useMutation({
-        mutationFn: (payload:any) => updateQuestion(payload),
+        mutationFn: (payload: any) => updateQuestion(payload),
         onSuccess: () => {
           Swal.fire({
             title: "success update question",
@@ -244,11 +246,15 @@ const useTest = () => {
       return await axiosClient.post("/tests/save", payload).then((r) => r.data);
     };
     const deleteTest = async (id: string) => {
-      return await axiosClient.delete(`/tests/delete/${id}`).then((r) => r.data);
+      return await axiosClient
+        .delete(`/tests/delete/${id}`)
+        .then((r) => r.data);
     };
 
     const updateTest = async (payload: any) => {
-      return await axiosClient.patch(`/tests/update/${payload.id}`, payload.data).then((r) => r.data);
+      return await axiosClient
+        .patch(`/tests/update/${payload.id}`, payload.data)
+        .then((r) => r.data);
     };
 
     const getDetailTest = async (id: string) => {
@@ -256,12 +262,12 @@ const useTest = () => {
     };
 
     const useCreateTest = () => {
-      const QueryClient = useQueryClient()
+      const QueryClient = useQueryClient();
       const { mutate: createTestFn } = useMutation({
         mutationFn: (payload: any) => createTest(payload),
 
         onSuccess: () => {
-          QueryClient.invalidateQueries({queryKey: ["/test"]})
+          QueryClient.invalidateQueries({ queryKey: ["/test"] });
           Swal.fire({
             title: "success create test",
             icon: "success",
@@ -278,9 +284,9 @@ const useTest = () => {
             showConfirmButton: false,
           });
         },
-      })
+      });
       return { createTestFn };
-    }
+    };
     const useGetAllTest = () => {
       const { data, isLoading } = useQuery({
         queryFn: getAllTest,
@@ -311,10 +317,10 @@ const useTest = () => {
           });
 
           console.log(e);
-        }
-      })
+        },
+      });
       return { update };
-    }
+    };
 
     const useDeleteTest = () => {
       const queryClient = useQueryClient();
@@ -336,10 +342,10 @@ const useTest = () => {
           });
 
           console.log(e);
-        }
-      })
+        },
+      });
       return { deleteTestFn };
-    }
+    };
 
     const useGetDetailTest = (id: string) => {
       const { data, isLoading, refetch } = useQuery({
@@ -350,12 +356,73 @@ const useTest = () => {
 
       return { data, isLoading, refetch };
     };
-    return {useCreateTest, useDeleteTest,useGetAllTest, useGetDetailTest, useUpdateTest };
+    return {
+      useCreateTest,
+      useDeleteTest,
+      useGetAllTest,
+      useGetDetailTest,
+      useUpdateTest,
+    };
   };
 
   const useResultApi = () => {
-    
-  }
+    const getResult = async () => {
+      return await axiosClient.get("/announcement").then((r) => r.data);
+    };
+
+
+    const publishFn = async (id:string) => {
+      return await axiosClient.patch(`/announcement/publish/${id}`).then(r=>r.data)
+    }
+    const detailResult = async (id:string) => {
+      return await axiosClient.get(`/announcement/detail/${id}`).then(r=>r.data)
+    }
+
+    const usePublish = () => {
+      const queryClient = new QueryClient()
+      const { mutate: publish } = useMutation({
+        mutationFn: (id:string)=>  publishFn(id),
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["/result"] });
+          Swal.fire({
+            title: "success publish result",
+            icon: "success",
+            draggable: false,
+          });
+        },
+        onError: () => {
+          Swal.fire({
+            title: "failed publish result",
+            icon: "error",
+            draggable: false,
+          });
+        },
+      })
+
+      return {publish}
+    }
+
+    const useGetAllResult = () => {
+      const { data, isLoading } = useQuery({
+        queryFn: getResult,
+        queryKey: ["/result"],
+        select: (d) => d.data,
+      });
+      return { data, isLoading };
+    };
+
+    const useGetDetailResult = (id:string) => {
+      const { data, isLoading } = useQuery({
+        queryFn: () => detailResult(id),
+        queryKey: ["/result"],
+        select: (d) => d.data,
+      })
+
+      return {data,isLoading}
+    }
+
+    return { useGetAllResult, usePublish, useGetDetailResult };
+  };
   return { useCategoryTest, useQuestionsTest, useTestApi, useResultApi };
 };
 
