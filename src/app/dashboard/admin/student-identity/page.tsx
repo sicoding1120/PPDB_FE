@@ -36,14 +36,33 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination'
+import Swal from 'sweetalert2'
 
 const TablePPDB = ({ data, isLoading }: any) => {
   const router = useRouter()
-  const { useDeleteStudent } = usePPDB()
+  const { useDeleteStudent, useChangeStatusStudent } = usePPDB()
   const mutate = useDeleteStudent()
+  const {changeStatus} = useChangeStatusStudent()
 
-  const updateStatus = (id:string) => {
-    
+  const updateStatus = async  (id:string, status:string) => {
+   const result  = await  Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, update it!'
+    })
+
+    if (result.isConfirmed == true) {
+     await changeStatus({
+        id: id,
+        data: {
+          status: status
+        }
+      })
+    }
   }
 
   return data.length == 0 ? (
@@ -58,6 +77,7 @@ const TablePPDB = ({ data, isLoading }: any) => {
           <TableHead className='w-[200px]'>School</TableHead>
           <TableHead className='w-[200px]'>NISN</TableHead>
           <TableHead className='w-[200px]'>NIK</TableHead>
+          <TableHead className='w-[200px]'>status</TableHead>
           <TableHead className='w-[200px]'>Action</TableHead>
         </TableRow>
       </TableHeader>
@@ -72,6 +92,7 @@ const TablePPDB = ({ data, isLoading }: any) => {
                 <TableCell>{student.from_school}</TableCell>
                 <TableCell>{student.NISN}</TableCell>
                 <TableCell>{student.NIK}</TableCell>
+                <TableCell>{student.status}</TableCell>
                 <TableCell className='flex gap-4 items-center'>
                   <Button
                     variant='default'
@@ -85,18 +106,21 @@ const TablePPDB = ({ data, isLoading }: any) => {
                     <IoEyeSharp />
                   </Button>
                   <Button
+                    disabled={student.status == "PASSED"}
                     variant='default'
                     className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
-                    onClick={() => updateStatus(student?.ID)}
+                    onClick={async() =>  updateStatus(student?.ID, "PASSED")}
                   >
                     <FaCheckCircle />
                   </Button>
 
                   <Button
+                    disabled={student.status == "FAILED"}
                     variant='default'
+                    onClick={async() => updateStatus(student?.ID, "PENDING")}
                     className='border border-transparent bg-yellow-500 hover:bg-transparent hover:border-yellow-500 hover:text-yellow-500'
                   >
-                    <FaTimesCircle />
+                    <FaTimesCircle  />
                   </Button>
                   <Button
                     variant='default'

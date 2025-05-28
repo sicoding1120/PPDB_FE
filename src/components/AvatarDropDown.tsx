@@ -5,8 +5,32 @@ import {
   DropdownMenuItem
 } from '@/components/ui/dropdown-menu'
 import { Avatar } from '@/components/ui/avatar'
+import { useRouter } from 'next/navigation'
+import Swal from 'sweetalert2'
+import useAuthModule from '@/hooks/use-auth'
 
-export default function AvatarDropdown () {
+export default function AvatarDropdown() {
+  const router = useRouter()
+
+  const { useLogout } = useAuthModule()
+  const {Logout}  = useLogout()
+
+  const handleLogout = async () => {
+    const result  = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    })
+
+    if (result.isConfirmed === true) {
+      Logout()
+    }
+
+
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -16,10 +40,10 @@ export default function AvatarDropdown () {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className='w-48 mt-2'>
-        <DropdownMenuItem onClick={() => console.log('Go to profile')}>
+        <DropdownMenuItem onClick={() => router.push("/dashboard/admin/profile")}>
           Profile
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => console.log('Logout')}>
+        <DropdownMenuItem onClick={() => handleLogout()}>
           Logout
         </DropdownMenuItem>
       </DropdownMenuContent>

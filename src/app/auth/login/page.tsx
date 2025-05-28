@@ -16,12 +16,24 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card"
-import useAuthModule from '../lib'
-import { LoginPayload } from '../interface'
-import { LoginSchema } from "../schema/login";
 
+import * as yup from "yup";
+import useAuthModule, { LoginPayload } from "@/hooks/use-auth";
 
-
+const LoginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .nullable()
+    .default("")
+    .email("Gunakan format email")
+    .required("Wajib isi"),
+  password: yup
+    .string()
+    .nullable()
+    .default("")
+    .required("Wajib isi")
+    .min(8, "Minimal 8 karakater"),
+});
 
 const LoginPage = () => {
     const { useLoginAdmin } = useAuthModule()

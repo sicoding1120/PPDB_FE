@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { axiosClient } from "@/lib/axiosCLient";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
 const usePPDB = () => {
@@ -34,14 +34,16 @@ const usePPDB = () => {
 
   const changeStatusStudent = async (payload: any) => {
     return await axiosClient
-      .patch(`student/status/${payload.id}`, payload.data)
+      .patch(`/student/status/${payload.id}`, payload.data)
       .then((r) => r.data);
   };
 
   const useChangeStatusStudent = () => {
+    const queryClient = new QueryClient()
     const { mutate: changeStatus } = useMutation({
-      mutationFn: (payload) => changeStatusStudent(payload),
+      mutationFn: (payload:any) => changeStatusStudent(payload),
       onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["/students"] });
         Swal.fire({
           position: "center",
           icon: "success",

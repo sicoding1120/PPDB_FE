@@ -1,14 +1,26 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, { use } from 'react'
 import Image from 'next/image'
 import usePPDB from '@/hooks/use-fromPPDB'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/components/ui/table'
+import { FaDownload } from 'react-icons/fa'
+
 // import { FiCamera } from 'react-icons/fi'
 import { FaArrowLeft } from 'react-icons/fa6'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { studentFieldDummy } from '@/data/studentDummy'
 import { parentFields } from '@/data/parentDummy'
+import Link from 'next/link'
 
 interface DetailStudentProps {
   params: Promise<{ id: string }>
@@ -22,7 +34,16 @@ const DetailStudent = ({ params }: DetailStudentProps) => {
   const studentFields = studentFieldDummy
   const ParentField = parentFields
 
-  console.log(studentData?.father)
+  const formatLabel = (key: string) => {
+    return key
+      .replace(/_/g, ' ') // ganti _ dengan spasi
+      .replace(/url/i, '') // hilangkan "url"
+      .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase jadi spasi
+      .trim()
+      .replace(/\b\w/g, char => char.toUpperCase()) // kapitalisasi awal kata
+  }
+  const hiddenKeys = ['ID', 'createdAt', 'updatedAt', 'status']
+
 
   if (isLoading) {
     return <div className='text-center mt-10 text-gray-500'>Loading...</div>
@@ -131,7 +152,6 @@ const DetailStudent = ({ params }: DetailStudentProps) => {
           ))
         )}
       </form>
-      
       <div className='w-full h-12  mt-8 mb-8 flex items-center'>
         <hr className='w-1/2 text-green-500' />
         <p className='mx-2 w-64 text-xl text-center font-semibold capitalize text-green-500'>
@@ -139,7 +159,52 @@ const DetailStudent = ({ params }: DetailStudentProps) => {
         </p>
         <hr className='w-1/2 text-green-500' />
       </div>
-      <form ></form>
+
+      <div className='overflow-x-auto'>
+<Table className='rounded-xl overflow-hidden border border-gray-200 shadow-sm text-sm'>
+  <TableHeader className='bg-green-50 text-gray-700'>
+    <TableRow className='divide-x divide-gray-200'>
+      <TableHead className='w-16 text-center'>No</TableHead>
+      <TableHead>Name File</TableHead>
+      <TableHead>URL</TableHead>
+      <TableHead className='text-center'>Actions</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody className='divide-y divide-gray-100'>
+    {Object.entries(studentData.document || {})
+      .filter(([key]) => !hiddenKeys.includes(key))
+      .map(([key, value]:any, index) => (
+        <TableRow
+          key={key}
+          className='divide-x divide-gray-100 hover:bg-green-50/40 transition-colors'
+        >
+          <TableCell className='text-center text-gray-700 font-medium'>
+            {index + 1}
+          </TableCell>
+          <TableCell className='text-gray-800 font-medium px-4'>
+            {formatLabel(key)}
+          </TableCell>
+          <TableCell className='text-blue-600 underline break-all px-4 max-w-xs ellipsis-link'>
+            <Link href={value || '#'} target='_blank' rel='noopener noreferrer'>
+              {value}
+            </Link>
+          </TableCell>
+          <TableCell className='text-center px-4'>
+            <Link
+              href={value || '#'}
+              download
+              className='inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-green-500 hover:bg-green-600 text-white rounded-md transition'
+            >
+              <FaDownload className='text-white' />
+              Download
+            </Link>
+          </TableCell>
+        </TableRow>
+      ))}
+  </TableBody>
+</Table>
+
+      </div>
     </div>
   )
 }

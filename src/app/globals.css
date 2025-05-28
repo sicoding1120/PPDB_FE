@@ -142,6 +142,12 @@
   text-overflow: ellipsis;
   max-width: 20px; /* atau sesuai kebutuhan */
 }
+.ellipsis-link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px; /* atau sesuai kebutuhan */
+}
 
 
 
