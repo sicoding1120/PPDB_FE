@@ -8,10 +8,7 @@ const usePPDB = () => {
   const getStudents = async () => {
     return await axiosClient.get("/student").then((r) => r.data);
   };
-  // const getParents = async () => {
-  //   return await axiosClient.get("/parents").then((r) => r.data);
-  // };
-
+  
   const getDetailStudent = async (id: string) => {
     return await axiosClient.get(`/student/${id}`).then((r) => r.data);
   };
@@ -26,13 +23,46 @@ const usePPDB = () => {
   const getDetailParent = async (id: string) => {
     return await axiosClient.get(`/student/parents/${id}`).then((r) => r.data);
   };
-  const getDocuments = async() => { 
-    return await axiosClient.get("/document").then(r=>r.data)
-  }
-  const SetChangeStatusDoc = async(payload:any) => {
-    return await axiosClient.put(`/document/update/${payload.id}`,payload.data).then(r=>r.data)
-  }
+  const getDocuments = async () => {
+    return await axiosClient.get("/document").then((r) => r.data);
+  };
+  const SetChangeStatusDoc = async (payload: any) => {
+    return await axiosClient
+      .put(`/document/update/${payload.id}`, payload.data)
+      .then((r) => r.data);
+  };
 
+  const changeStatusStudent = async (payload: any) => {
+    return await axiosClient
+      .patch(`student/status/${payload.id}`, payload.data)
+      .then((r) => r.data);
+  };
+
+  const useChangeStatusStudent = () => {
+    const { mutate: changeStatus } = useMutation({
+      mutationFn: (payload) => changeStatusStudent(payload),
+      onSuccess: () => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+      onError: () => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Failed",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+    });
+
+    return { changeStatus };
+  };
   const useChangeStatusDoc = () => {
     const { mutate: changeStatus } = useMutation({
       mutationFn: (payload) => SetChangeStatusDoc(payload),
@@ -54,20 +84,20 @@ const usePPDB = () => {
           timer: 1500,
         });
       },
-    })
+    });
 
     return {
-      changeStatus
-    }
-  }
+      changeStatus,
+    };
+  };
   const useGetDocument = () => {
-    const {data,isLoading} = useQuery({
+    const { data, isLoading } = useQuery({
       queryFn: getDocuments,
       queryKey: ["/document"],
       select: (d) => d.data,
-    })
-    return {data,isLoading}
-}
+    });
+    return { data, isLoading };
+  };
   const useGetStudents = () => {
     const { data, isLoading } = useQuery({
       queryFn: getStudents,
@@ -84,14 +114,14 @@ const usePPDB = () => {
     });
     return { data, isLoading };
   };
-  const useGetDetailParent = (id:string) => {
+  const useGetDetailParent = (id: string) => {
     const { data, isLoading } = useQuery({
-      queryFn: ()=> getDetailParent(id),
+      queryFn: () => getDetailParent(id),
       queryKey: ["/parents/detail"],
       select: (d) => d.data,
     });
     return { data, isLoading };
-  }
+  };
 
   const useGetDetailStudent = (id: string) => {
     const { data, isLoading } = useQuery({
@@ -114,7 +144,16 @@ const usePPDB = () => {
     });
     return { deleteStudent };
   };
-  return { useGetStudents, useParents, useGetDetailStudent, useDeleteStudent, useGetDetailParent, useGetDocument, useChangeStatusDoc };
+  return {
+    useGetStudents,
+    useParents,
+    useGetDetailStudent,
+    useDeleteStudent,
+    useGetDetailParent,
+    useGetDocument,
+    useChangeStatusDoc,
+    useChangeStatusStudent
+  };
 };
 
 export default usePPDB;

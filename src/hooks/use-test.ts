@@ -352,7 +352,11 @@ const useTest = () => {
     };
     return {useCreateTest, useDeleteTest,useGetAllTest, useGetDetailTest, useUpdateTest };
   };
-  return { useCategoryTest, useQuestionsTest, useTestApi };
+
+  const useResultApi = () => {
+    
+  }
+  return { useCategoryTest, useQuestionsTest, useTestApi, useResultApi };
 };
 
 export default useTest;

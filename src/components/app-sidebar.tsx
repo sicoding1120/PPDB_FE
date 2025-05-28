@@ -196,7 +196,7 @@ export const PublishPPDB = () => {
           </CollapsibleTrigger>
           <CollapsibleContent>
             <SidebarMenuSub>
-            <Link href='/dashboard/admin/test/publish'>
+            <Link href='/dashboard/admin/test/manage/statistic'>
                 <SidebarMenuSubItem className='text-sm py-1 px-2 hover:bg-green-500/10 mt-2'>
                   Statistic
                 </SidebarMenuSubItem>
@@ -267,39 +267,7 @@ export const PublishPPDB = () => {
                   </CollapsibleContent>
                 </SidebarMenuSubItem>
               </Collapsible>
-              {/* Question Submenu */}
-              {/* <Collapsible className='group'>
-                <SidebarMenuSubItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton
-                      className='flex items-center justify-between w-full text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'
-                      data-collapsible-trigger
-                    >
-                      <div className='flex gap-2 items-center'>
-                        <PiHandSwipeRight />
-                        <span>Question</span>
-                      </div>
-
-                      <ChevronRight
-                        className='h-4 w-4 transition-transform duration-200'
-                        data-collapsible-icon
-                      />
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className='pl-4'>
-                    <Link href='/dashboard/admin/test/manage/question/show'>
-                      <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
-                        Show Questions
-                      </SidebarMenuSubItem>
-                    </Link>
-                    <Link href='/dashboard/admin/test/manage/question/create'>
-                      <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
-                        Create Question
-                      </SidebarMenuSubItem>
-                    </Link>
-                  </CollapsibleContent>
-                </SidebarMenuSubItem>
-              </Collapsible> */}
+              
               {/* Publish Test Result */}
               <Link href='/dashboard/admin/test/publish'>
                 <SidebarMenuSubItem className='text-sm py-1 px-2 hover:bg-green-500/10 mt-2'>

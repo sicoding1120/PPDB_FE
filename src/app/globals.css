@@ -182,3 +182,8 @@
 .text-color1 {
   color: #24D674;
 }
+
+.bg-statistic-test {
+  background-color: #F3F3F3;
+  background-image: url("/assets/bg-statistic-test.jpg");
+}

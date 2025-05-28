@@ -32,7 +32,7 @@ export default function RootLayout ({
 }>) {
   return (
     <html lang='en'>
-      <body className={`antialiased ${poppins.className} bg-gray-100 text-gray-900`}>
+      <body className={`antialiased ${poppins.className}  text-gray-900`}>
         <ReactQuery>{children}</ReactQuery>
       </body>
     </html>

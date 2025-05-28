@@ -19,12 +19,11 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-// import { siswaData } from '@/data/siswa'
 import usePPDB from '@/hooks/use-fromPPDB'
 
 import React, { useState } from 'react'
 import { CiSearch } from 'react-icons/ci'
-import { FaTrash } from 'react-icons/fa'
+import { FaCheckCircle, FaTimesCircle, FaTrash } from 'react-icons/fa'
 import { IoEyeSharp } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
 import DownloadExcelButton from '@/components/DownloadExcelBtn'
@@ -37,43 +36,22 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination'
-import { siswaData } from '@/data/siswa'
 
- const TablePPDB = ({ data, isLoading }: any) => {
+const TablePPDB = ({ data, isLoading }: any) => {
   const router = useRouter()
   const { useDeleteStudent } = usePPDB()
   const mutate = useDeleteStudent()
 
-  // const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const updateStatus = (id:string) => {
+    
+  }
 
-  // const handleSelectAll = () => {
-  //   if (selectedIds.length === data.length) {
-  //     setSelectedIds([])
-  //   } else {
-  //     setSelectedIds(data.map((student: any) => student?.id?.toString()))
-  //   }
-  // }
-
-  // const handleCheckboxChange = (id: string) => {
-  //   setSelectedIds(prev =>
-  //     prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-  //   )
-  // }
-
-  // const isAllSelected = selectedIds.length === data.length
-
-  return data.length == 0 ? <div>No data available</div> : (
+  return data.length == 0 ? (
+    <div>No data available</div>
+  ) : (
     <Table className='h-3/4 overflow-y-auto'>
       <TableHeader>
         <TableRow>
-          <TableHead className='w-[30px]'>
-            <input
-              type='checkbox'
-              title='Select All'
-              // onChange={handleSelectAll}
-              // checked={isAllSelected}
-            />
-          </TableHead>
           <TableHead className='w-[30px]'>No</TableHead>
           <TableHead className='w-[200px]'>Full Name</TableHead>
           <TableHead className='w-[50px]'>Age</TableHead>
@@ -84,18 +62,10 @@ import { siswaData } from '@/data/siswa'
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data && (
+        {data &&
           data.map((student: any, i: number) => {
             return (
               <TableRow key={i}>
-                <TableCell>
-                  <input
-                    type='checkbox'
-                    title='Select Row'
-                    // checked={selectedIds.includes(student.id.toString())}
-                    // onChange={() => handleCheckboxChange(student.id.toString())}
-                  />
-                </TableCell>
                 <TableCell>{i + 1}</TableCell>
                 <TableCell>{student.fullName}</TableCell>
                 <TableCell>{student.age}</TableCell>
@@ -105,7 +75,7 @@ import { siswaData } from '@/data/siswa'
                 <TableCell className='flex gap-4 items-center'>
                   <Button
                     variant='default'
-                    className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
+                    className='border border-transparent bg-blue-500 hover:bg-transparent hover:border-blue-500 hover:text-blue-500'
                     onClick={() =>
                       router.push(
                         `/dashboard/admin/student-identity/${student.ID}`
@@ -114,7 +84,20 @@ import { siswaData } from '@/data/siswa'
                   >
                     <IoEyeSharp />
                   </Button>
+                  <Button
+                    variant='default'
+                    className='border border-transparent bg-green-500 hover:bg-transparent hover:border-green-500 hover:text-green-500'
+                    onClick={() => updateStatus(student?.ID)}
+                  >
+                    <FaCheckCircle />
+                  </Button>
 
+                  <Button
+                    variant='default'
+                    className='border border-transparent bg-yellow-500 hover:bg-transparent hover:border-yellow-500 hover:text-yellow-500'
+                  >
+                    <FaTimesCircle />
+                  </Button>
                   <Button
                     variant='default'
                     className='border border-transparent bg-red-500 hover:bg-transparent hover:border-red-500 hover:text-red-500'
@@ -125,8 +108,7 @@ import { siswaData } from '@/data/siswa'
                 </TableCell>
               </TableRow>
             )
-          })
-        )}
+          })}
       </TableBody>
     </Table>
   )
@@ -143,7 +125,7 @@ const StudentIdentity = () => {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setSearchTerm(value)
-    setPage(1) // reset ke page 1 saat search
+    setPage(1)
   }
 
   const filteredData = data.filter(
@@ -151,7 +133,6 @@ const StudentIdentity = () => {
       s.fullName?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
       s.NISN?.toLowerCase().includes(searchTerm?.toLowerCase())
   )
-
 
   const totalPages = Math.ceil(filteredData.length / pageSize)
   const paginatedData = filteredData.slice(
@@ -165,7 +146,7 @@ const StudentIdentity = () => {
         <div className='flex items-center gap-2 w-2/3'>
           <h3 className='text-2xl font-bold capitalize w-1/5'>New Student</h3>
           <div className='w-1/2 h-8 rounded-sm bg-black/5 px-2 gap-2 flex items-center ml-4'>
-            <CiSearch size={22}  />
+            <CiSearch size={22} />
             <input
               type='text'
               placeholder='search'
@@ -178,7 +159,7 @@ const StudentIdentity = () => {
         <div className='w-1/3 items-center flex gap-4 justify-end'>
           <div className='flex gap-2 items-center'>
             <span>Showing</span>
-            <Select onValueChange={(e:any)=> setPageSize(parseInt(e))}>
+            <Select onValueChange={(e: any) => setPageSize(parseInt(e))}>
               <SelectTrigger className='w-[80px] '>
                 <SelectValue placeholder='10' />
               </SelectTrigger>
