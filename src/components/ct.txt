@@ -8,3 +8,7 @@
                                     <p className="text-base italic">"Pendaftarannya mudah dan bisa dari <span className="ml-1.5">rumah. Sangat membantu!"</span></p>
                                 </div>
                             </div>
+
+
+
+                                                    
