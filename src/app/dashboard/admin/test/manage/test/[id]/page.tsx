@@ -92,7 +92,7 @@ const DetailTestPage = ({ params }: { params: Promise<{ id: string }> }) => {
  
   return (
     <section className='w-full h-full flex flex-col gap-4 pb-6'>
-      <div className='bg-white w-full h-full border-l-4 border-green-500 shadow-md rounded-md p-6 flex flex-col gap-4 '>
+      <div className='bg-white dark:bg-[#282C34] dark:text-[#ABB2BF] w-full h-full border-l-4 border-green-500 shadow-md rounded-md p-6 flex flex-col gap-4 '>
         <div className='flex items-center mb-4'>
           <svg
             className='w-6 h-6 text-green-500 mr-2'
@@ -107,10 +107,10 @@ const DetailTestPage = ({ params }: { params: Promise<{ id: string }> }) => {
               d='M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z'
             />
           </svg>
-          <h2 className='text-xl font-semibold text-gray-800'>Detail Tes</h2>
+          <h2 className='text-xl font-semibold text-gray-800 dark:text-[#ABB2BF]'>Detail Tes</h2>
         </div>
 
-        <div className='space-y-3 flex gap-4  justify-between text-gray-700 px-8'>
+        <div className='space-y-3 flex gap-4  justify-between text-gray-700 dark:text-[#ABB2BF] px-8'>
           <div className='flex flex-col gap-1 text-2xl font-semibold'>
             <span className=' text-sm'>Title Test:</span> {data?.title}
           </div>
@@ -131,7 +131,7 @@ const DetailTestPage = ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
         </div>
       </div>
-      <div className='w-full h-full gap-4 flex flex-col mb-12'>
+      <div className='w-full h-full gap-4 flex flex-col mb-12 dark:border-slate-50/10'>
         {questions &&
           questions.map((q: any, i: any) => (
             <ExistedQuestionsCard q={q} i={i} key={i} />

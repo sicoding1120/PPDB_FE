@@ -1,44 +1,64 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import * as XLSX from 'xlsx'
-import { saveAs } from 'file-saver'
-import { Button } from './ui/button'
+import React from 'react'
+import jsPDF from 'jspdf'
 
-const DownloadExcelButton = ({dataRandom, dataName}:any) => {
-  const handleDownload = () => {
-    // Contoh data, bisa diganti dengan data dari API
-    const data = dataRandom
+interface PdfReportProps {
+  headers: string[]
+  data: Record<string, any>[]
+  fileName?: string
+}
 
-    // Buat worksheet dari data
-    const worksheet = XLSX.utils.json_to_sheet(data)
+const PdfReport: React.FC<PdfReportProps> = ({
+  headers,
+  data,
+  fileName = 'laporan.pdf'
+}) => {
+  const generatePDF = () => {
+    const doc = new jsPDF()
 
-    // Buat workbook dan tambahkan worksheet ke dalamnya
-    const workbook = XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
+    // Judul
+    doc.setFontSize(18)
+    doc.text('Laporan Data Masuk', 14, 22)
 
-    // Konversi ke format Excel
-    const excelBuffer = XLSX.write(workbook, {
-      bookType: 'xlsx',
-      type: 'array'
+    // Atur posisi awal tabel
+    let y = 30
+    const marginLeft = 14
+    const rowHeight = 10
+    const colWidth = 180 / headers.length // lebarkan kolom sesuai jumlah header
+
+    // Header tabel
+    doc.setFontSize(12)
+    doc.setFillColor(220, 220, 220)
+    doc.rect(marginLeft, y - 8, 180, rowHeight, 'F')
+    headers.forEach((header, i) => {
+      doc.text(String(header), marginLeft + i * colWidth + 2, y)
     })
 
-    // Buat blob dan download
-    const blob = new Blob([excelBuffer], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+    // Baris data
+    y += rowHeight
+    data.forEach(row => {
+      headers.forEach((header, i) => {
+        const text = row[header] !== undefined ? String(row[header]) : '-'
+        doc.text(text, marginLeft + i * colWidth + 2, y)
+      })
+      y += rowHeight
+      // Jika mau handle halaman baru, bisa ditambah logika di sini
     })
 
-    saveAs(blob, `${dataName}.xlsx`)
+    // Save file
+    doc.save(fileName)
   }
 
   return (
-    <Button
-      onClick={handleDownload}
-      className='px-4 py-2 cursor-pointer  text-white rounded-md'
+    <button
+      onClick={generatePDF}
+      className='px-4 py-2 bg-blue-500 dark:bg-blue-400 dark:text-white  text-white rounded-xl hover:bg-blue-500 transition'
     >
-      Download Excel
-    </Button>
+      Download PDF
+    </button>
   )
 }
 
-export default DownloadExcelButton
+export default PdfReport

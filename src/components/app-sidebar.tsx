@@ -28,7 +28,7 @@ import Image from 'next/image'
 
 export function AppSidebar () {
   return (
-    <Sidebar className='border-slate-300  px-2  '>
+    <Sidebar className='border-slate-300 dark:border-[#2C313C] bg-white dark:bg-[#1B1D23] px-2  '>
       <SidebarHeader>
         <SidebarGroup className='mb-4'>
           <div className='flex items-center'>
@@ -46,13 +46,13 @@ export function AppSidebar () {
         </SidebarGroup>
       </SidebarHeader>
       <div className='flex flex-col overflow-y-auto mb-8'>
-      <OverviewSection />
-      <ManagePPDBSection />
-      <VerificationPaymentSection />
-      {/* <SelectionPPDB /> */}
-      <PublishPPDB />
-      <User />
-      <SidebarFooter />
+        <OverviewSection />
+        <ManagePPDBSection />
+        <VerificationPaymentSection />
+        {/* <SelectionPPDB /> */}
+        <PublishPPDB />
+        <User />
+        <SidebarFooter />
       </div>
     </Sidebar>
   )
@@ -100,11 +100,6 @@ export const ManagePPDBSection = () => {
                   Student Identity
                 </SidebarMenuSubItem>
               </Link>
-              {/* <Link href={'/dashboard/admin/parent-identity'}>
-                <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
-                  Parent Identity
-                </SidebarMenuSubItem>
-              </Link> */}
               <Link href={'/dashboard/admin/confirm-doc'}>
                 <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
                   Confirm Doc
@@ -130,54 +125,11 @@ export const VerificationPaymentSection = () => {
     </SidebarMenu>
   )
 }
-
-export const SelectionPPDB = () => {
-  return (
-    <SidebarMenu className='mt-2'>
-      <Collapsible defaultOpen className='group/collapsible'>
-        <SidebarMenuItem>
-          <CollapsibleTrigger asChild>
-            <SidebarMenuButton
-              className='flex items-center justify-between w-full text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'
-              data-collapsible-trigger
-            >
-              <div className='flex gap-2 items-center'>
-                <PiHandSwipeRight />
-                <span>Date Test</span>
-              </div>
-
-              <ChevronRight
-                className='h-4 w-4 transition-transform duration-200'
-                data-collapsible-icon
-              />
-            </SidebarMenuButton>
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <SidebarMenuSub>
-              <Link href={'/dashboard/admin/date-test/online'}>
-                <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
-                  Online
-                </SidebarMenuSubItem>
-              </Link>
-              <Link href={'/dashboard/admin/date-test/offline'}>
-                <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
-                  Offline
-                </SidebarMenuSubItem>
-              </Link>
-            </SidebarMenuSub>
-          </CollapsibleContent>
-        </SidebarMenuItem>
-      </Collapsible>
-    </SidebarMenu>
-  )
-}
-
 export const PublishPPDB = () => {
   return (
     <SidebarMenu className='mt-2'>
       <Collapsible defaultOpen className='group/collapsible'>
         <SidebarMenuItem>
-          
           <CollapsibleTrigger asChild>
             <SidebarMenuButton
               className='flex items-center justify-between w-full text-md hover:bg-green-500/10 hover:text-green-500/90 transition-colors'
@@ -196,11 +148,6 @@ export const PublishPPDB = () => {
           </CollapsibleTrigger>
           <CollapsibleContent>
             <SidebarMenuSub>
-            <Link href='/dashboard/admin/test/manage/statistic'>
-                <SidebarMenuSubItem className='text-sm py-1 px-2 hover:bg-green-500/10 mt-2'>
-                  Statistic
-                </SidebarMenuSubItem>
-              </Link>
               {/* Category Submenu */}
               <Collapsible className='group'>
                 <SidebarMenuSubItem>
@@ -259,15 +206,10 @@ export const PublishPPDB = () => {
                         Show Test
                       </SidebarMenuSubItem>
                     </Link>
-                    <Link href='/dashboard/admin/test/manage/test/create'>
-                      <SidebarMenuSubItem className='cursor-pointer text-sm mt-2 hover:bg-green-500/10 hover:text-green-500/90 transition-colors py-1 px-2'>
-                        Create Test
-                      </SidebarMenuSubItem>
-                    </Link>
                   </CollapsibleContent>
                 </SidebarMenuSubItem>
               </Collapsible>
-              
+
               {/* Publish Test Result */}
               <Link href='/dashboard/admin/test/publish'>
                 <SidebarMenuSubItem className='text-sm py-1 px-2 hover:bg-green-500/10 mt-2'>

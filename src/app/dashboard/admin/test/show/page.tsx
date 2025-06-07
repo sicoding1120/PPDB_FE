@@ -25,7 +25,7 @@ import { CiSearch } from 'react-icons/ci'
 
 const ShowResultPage = () => {
   return (
-    <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2'>
+    <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2 dark:bg-[#282C34] dark:text-[#ABB2BF] '>
       <div className='flex justify-between items-center w-full h-full py-2 gap-4 '>
         <div className='flex items-center gap-2 w-2/3'>
           <h3 className='text-2xl font-bold capitalize w-1/5'>Siswa Baru</h3>

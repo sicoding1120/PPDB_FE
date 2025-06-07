@@ -58,7 +58,7 @@ const DialogComponents = ({ variant }: DialogProps) => {
             Create Test
           </Button>
         </DialogTrigger>
-        <DialogContent className='sm:max-w-[425px] w-full'>
+        <DialogContent className='sm:max-w-[425px] w-full dark:text-[#ABB2BF]'>
           <DialogHeader>
             <DialogTitle>Create Test</DialogTitle>
             <DialogDescription>

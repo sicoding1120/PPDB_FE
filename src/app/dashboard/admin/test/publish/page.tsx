@@ -23,7 +23,7 @@ import React, { useState } from 'react'
 import { CiSearch } from 'react-icons/ci'
 import { FaGlobe } from 'react-icons/fa'
 import { IoEyeSharp } from 'react-icons/io5'
-import DownloadExcelButton from '@/components/DownloadExcelBtn'
+// import DownloadExcelButton from '@/components/DownloadExcelBtn'
 import {
   Pagination,
   PaginationContent,
@@ -66,7 +66,7 @@ const TablePPDB = ({ data }: any) => {
                 <TableCell>{i + 1}</TableCell>
                 <TableCell>{r.student.fullName}</TableCell>
                 <TableCell>{r.title}</TableCell>
-                <TableCell>{r.message}</TableCell>
+                <TableCell className='ellipsis-link'>{r.message}</TableCell>
                 <TableCell>{r.scoreAvg}</TableCell>
                 <TableCell>
                   <Badge
@@ -135,10 +135,10 @@ const StudentIdentity = () => {
   )
 
   return (
-    <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2'>
+    <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2 dark:text-[#ABB2BF]'>
       <div className='flex justify-between items-center w-full h-full py-2 gap-4 '>
         <div className='flex items-center gap-2 w-2/3'>
-          <h3 className='text-2xl font-bold capitalize w-1/5'>New Student</h3>
+          <h3 className='text-2xl font-bold capitalize w-1/5'>Publish Test</h3>
           <div className='w-1/2 h-8 rounded-sm bg-black/5 px-2 gap-2 flex items-center ml-4'>
             <CiSearch size={22} />
             <input
@@ -172,10 +172,10 @@ const StudentIdentity = () => {
             </Select>
           </div>
           {/* <Button>Download excel</Button> */}
-          <DownloadExcelButton dataRandom={data} dataName={'student'} />
+          {/* <DownloadExcelButton dataRandom={data} dataName={'student'} /> */}
         </div>
       </div>
-      <div className='w-full h-[82vh] bg-white rounded-xl p-4 flex flex-col  justify-between'>
+      <div className='w-full h-[82vh] bg-white dark:bg-[#282C34] dark:text-[#ABB2BF]  rounded-xl p-4 flex flex-col  justify-between'>
         <TablePPDB data={paginatedData} isLoading={isLoading} />
         <div className='w-full'>
           <Pagination>

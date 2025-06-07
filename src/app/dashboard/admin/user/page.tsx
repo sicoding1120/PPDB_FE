@@ -35,7 +35,6 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination'
-import DownloadExcelButton from '@/components/DownloadExcelBtn'
 import useUsers from '@/hooks/use-users'
 import { Badge } from '@/components/ui/badge'
 import HandlerUser from '@/lib/handler/user'
@@ -145,7 +144,7 @@ const parentIdentity = () => {
     page * pageSize
   )
   return (
-    <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2'>
+    <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2 dark:text-[#ABB2BF]'>
       <div className='flex justify-between items-center w-full h-full py-2 gap-4 '>
         <div className='flex items-center gap-2 w-2/3'>
           <h3 className='text-2xl font-bold capitalize w-1/4'>Manage User</h3>
@@ -182,10 +181,10 @@ const parentIdentity = () => {
               </SelectContent>
             </Select>
           </div>
-          <DownloadExcelButton dataRandom={data} dataName={'parents'} />
+          {/* <DownloadExcelButton dataRandom={data} dataName={'parents'} /> */}
         </div>
       </div>
-      <div className='w-full h-[82vh] bg-white rounded-xl p-4 flex flex-col  justify-between'>
+      <div className='w-full h-[82vh] bg-white dark:bg-[#282C34] dark:text-[#ABB2BF]  rounded-xl p-4 flex flex-col  justify-between'>
         <TableUser data={paginatedData} isLoading={isLoading} />
         <div className='w-full'>
           <Pagination>

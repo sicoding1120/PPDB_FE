@@ -20,7 +20,6 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import { CiSearch } from 'react-icons/ci'
 import { FaEdit, FaEye, FaTrash } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 
@@ -35,6 +34,7 @@ import {
 import useTest from '@/hooks/use-test'
 import Swal from 'sweetalert2'
 import DialogComponents from '@/components/dialogComponents'
+import { Search } from 'lucide-react'
 
 const TablePPDB = ({ data }: any) => {
   const router = useRouter()
@@ -90,7 +90,7 @@ const TablePPDB = ({ data }: any) => {
   return data?.length == 0 ? (
     <div>No data available</div>
   ) : (
-    <Table className='h-3/4 overflow-y-auto'>
+    <Table className='h-3/4 overflow-y-auto '>
       <TableHeader>
         <TableRow>
           <TableHead className='w-[50px]'>No</TableHead>
@@ -175,18 +175,19 @@ const ShowTest = () => {
     page * pageSize
   )
   return (
-    <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2'>
+    <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2 dark:text-[#ABB2BF]'>
       <div className='flex justify-between items-center w-full h-full py-2 gap-4 '>
         <div className='flex items-center gap-2 w-2/3'>
-          <h3 className='text-2xl font-bold capitalize w-1/4'>Category Test</h3>
-          <div className='w-1/2 h-8 rounded-sm bg-black/5 px-2 gap-2 flex items-center ml-4'>
-            <CiSearch size={22} />
+          <h3 className='text-2xl font-bold capitalize w-1/4'> Test</h3>
+          <div className='w-1/2 h-8 rounded-sm bg-black/5 px-2 gap-2 flex items-center ml-4 border border-transparent dark:border-slate-50/10'>
+            <Search size={22} className='' />
             <input
               type='text'
-              placeholder='search'
-              className='focus:outline-none '
+              placeholder='Search by name or NISN'
+              className='focus:outline-none w-full'
               title='search'
-              onChange={e => handleSearch(e)}
+              value={searchTerm}
+              onChange={handleSearch}
             />
           </div>
         </div>
@@ -225,7 +226,7 @@ const ShowTest = () => {
           <DialogComponents variant='createTest' />
         </div>
       </div>
-      <div className='w-full h-[82vh] bg-white rounded-xl p-4 flex flex-col  justify-between'>
+      <div className='w-full h-[82vh] bg-white dark:bg-[#282C34] dark:text-[#ABB2BF] rounded-xl p-4 flex flex-col  justify-between'>
         <TablePPDB data={paginatedData} isLoading={isLoading} />
         <div className='w-full'>
           <Pagination>

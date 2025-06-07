@@ -38,19 +38,20 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination'
-import DownloadExcelButton from '@/components/DownloadExcelBtn'
+// import DownloadExcelButton from '@/components/DownloadExcelBtn'
 import useTest from '@/hooks/use-test'
 import Swal from 'sweetalert2'
+import { Search } from 'lucide-react'
 
- const TablePPDB = ({ data, isLoading }: any) => {
+const TablePPDB = ({ data, isLoading }: any) => {
   const router = useRouter()
 
   const { useCategoryTest } = useTest()
-    const { useDeleteCategoryTest } = useCategoryTest()
-    const mutate = useDeleteCategoryTest()
+  const { useDeleteCategoryTest } = useCategoryTest()
+  const mutate = useDeleteCategoryTest()
 
   const handleDelete = async (id: string) => {
-    console.log(id);
+    console.log(id)
     const result = await Swal.fire({
       title: 'are you sure ?',
       text: "You won't be able to revert this!",
@@ -62,33 +63,10 @@ import Swal from 'sweetalert2'
     })
 
     if (result.isConfirmed == true) {
-         mutate.Delete(id)
-        // Swal.fire({
-        //     title: "Deleted!",
-        //     text: "Your file has been deleted.",
-        //     icon: "success",
-        //     confirmButtonText: "Close"
-        // })
+      mutate.Delete(id)
     }
   }
 
-  // const [selectedIds, setSelectedIds] = useState<string[]>([])
-
-  // const handleSelectAll = () => {
-  //   if (selectedIds.length === data.length) {
-  //     setSelectedIds([])
-  //   } else {
-  //     setSelectedIds(data.map((student: any) => student?.id?.toString()))
-  //   }
-  // }
-
-  // const handleCheckboxChange = (id: string) => {
-  //   setSelectedIds(prev =>
-  //     prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-  //   )
-  // }
-
-  // const isAllSelected = selectedIds.length === data.length
 
   return data.length == 0 ? (
     <div>No data available</div>
@@ -96,17 +74,14 @@ import Swal from 'sweetalert2'
     <Table className='h-3/4 overflow-y-auto'>
       <TableHeader>
         <TableRow>
-          <TableHead className='w-[30px]'>
-            <input
-              type='checkbox'
-              title='Select All'
-              // onChange={handleSelectAll}
-              // checked={isAllSelected}
-            />
-          </TableHead>
+         
           <TableHead className='w-[300px]'>No</TableHead>
-          <TableHead className='w-[6git branch
-            00px]'>Category Test Name</TableHead>
+          <TableHead
+            className='w-[6git branch
+            00px]'
+          >
+            Category Test Name
+          </TableHead>
           <TableHead className='w-[300px]'>Action</TableHead>
         </TableRow>
       </TableHeader>
@@ -115,21 +90,17 @@ import Swal from 'sweetalert2'
           data.map((ct: any, i: number) => {
             return (
               <TableRow key={i}>
-                <TableCell>
-                  <input
-                    type='checkbox'
-                    title='Select Row'
-                    // checked={selectedIds.includes(ct.id.toString())}
-                    // onChange={() => handleCheckboxChange(ct.id.toString())}
-                  />
-                </TableCell>
                 <TableCell>{i + 1}</TableCell>
                 <TableCell>{ct?.name}</TableCell>
 
                 <TableCell className='flex gap-4 items-center'>
                   <Button
                     variant='default'
-                    onClick={() => router.push(`/dashboard/admin/test/manage/category/${ct?.ID}/update`)}
+                    onClick={() =>
+                      router.push(
+                        `/dashboard/admin/test/manage/category/${ct?.ID}/update`
+                      )
+                    }
                     className='border border-transparent bg-blue-500 hover:bg-transparent hover:border-blue-500 hover:text-blue-500'
                   >
                     <FaEdit />
@@ -182,18 +153,19 @@ const parentIdentity = () => {
     page * pageSize
   )
   return (
-    <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2'>
+    <div className='w-full h-full rounded-xl flex flex-col gap-4 px-2 dark:text-[#ABB2BF]'>
       <div className='flex justify-between items-center w-full h-full py-2 gap-4 '>
-        <div className='flex items-center gap-2 w-2/3'>
-          <h3 className='text-2xl font-bold capitalize w-1/4'>Category Test</h3>
-          <div className='w-1/2 h-8 rounded-sm bg-black/5 px-2 gap-2 flex items-center ml-4'>
-            <CiSearch size={22} />
+        <div className='flex items-center gap-2 w-2/3 '>
+          <h3 className='text-2xl font-bold capitalize w-1/4 '>Category Test</h3>
+          <div className='w-1/2 h-8 rounded-sm bg-black/5 px-2 gap-2 flex items-center ml-4 border border-transparent dark:border-slate-50/10'>
+            <Search size={22} className='' />
             <input
               type='text'
-              placeholder='search'
-              className='focus:outline-none '
+              placeholder='Search by name or NISN'
+              className='focus:outline-none w-full'
               title='search'
-              onChange={e => handleSearch(e)}
+              value={searchTerm}
+              onChange={handleSearch}
             />
           </div>
         </div>
@@ -219,10 +191,10 @@ const parentIdentity = () => {
               </SelectContent>
             </Select>
           </div>
-          <DownloadExcelButton dataRandom={data} dataName={'parents'} />
+          {/* <DownloadExcelButton dataRandom={data} dataName={'parents'} /> */}
         </div>
       </div>
-      <div className='w-full h-[82vh] bg-white rounded-xl p-4 flex flex-col  justify-between'>
+      <div className='w-full h-[82vh] bg-white dark:bg-[#282C34] dark:text-[#ABB2BF] rounded-xl p-4 flex flex-col  justify-between'>
         <TablePPDB data={paginatedData} isLoading={isLoading} />
         <div className='w-full'>
           <Pagination>

@@ -1,6 +1,6 @@
 import { axiosClient } from "@/lib/axiosCLient";
 import { useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 // import Cookie from "js-cookie";
 
@@ -24,7 +24,10 @@ const useAuthModule = () => {
   };
 const logout = async () => {
   return await axiosClient.post("/auth/admin/logout").then((res) => res.data);
-    }
+  }
+  const profile = async (id:string) => {
+    return await axiosClient.get(`/auth/profile/admin/${id}`).then(res=>res.data)
+  }
     
     const useLogout = () => {
       const { mutate:Logout, isPending } = useMutation({
@@ -78,7 +81,18 @@ const logout = async () => {
     return { mutate, isPending };
   };
 
-  return { useLoginAdmin, useLogout }
+  const useProfileAdmin = (id:string) => {
+    const { data,isLoading} = useQuery({
+      queryFn: () => profile(id),
+      queryKey: ["/profile/admin"],
+      select: data => data.data,
+      enabled: !!id
+    })
+
+    return {data,isLoading}
+  }
+
+  return { useLoginAdmin, useLogout, useProfileAdmin }
 
 };
 

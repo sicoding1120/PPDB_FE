@@ -115,6 +115,10 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.bg-profile-admin {
+  background-image: url("/bg-admin-profile.jpg");
+}
+
 [data-collapsible-trigger][data-state='open'] [data-collapsible-icon] {
   transform: rotate(90deg);
 }

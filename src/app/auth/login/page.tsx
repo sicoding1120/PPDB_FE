@@ -64,7 +64,7 @@ const LoginPage = () => {
                     </div>
                 </div>
                 <div className="w-[70%] h-screen p-32">
-                    <div className="w-full h-full flex flex-col justify-center bg-white space-y-10">
+                    <div className="w-full h-full flex flex-col justify-center bg-white dark:bg-[#282C34] dark:text-[#ABB2BF] px-4 rounded-xl space-y-10">
                         <div className="flex justify-center items-center">
                             <p className={`text-3xl font-semibold  text-color1`}>Welcome Back Admin!</p>
                         </div>

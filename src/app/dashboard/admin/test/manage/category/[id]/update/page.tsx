@@ -39,7 +39,7 @@ const UpdateCategoryTest = ({ params }: DetailCategoryTestProps) => {
   })
   return (
     <section className='w-full h-[90vh] flex justify-center items-center p-6'>
-      <div className='w-1/2 rounded-3xl bg-white px-8 py-12'>
+      <div className='w-1/2 rounded-3xl bg-white dark:bg-[#282C34] dark:text-[#ABB2BF]  px-8 py-12'>
         <h3 className='text-2xl font-bold capitalize w-full text-center'>
           Update Category test
         </h3>
