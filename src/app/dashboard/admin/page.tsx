@@ -125,7 +125,7 @@ const DashboardPage = () => {
       </div>
       <div className='w-full h-full bg-white dark:bg-[#282C34] dark:text-[#ABB2BF]  rounded-xl p-6 flex flex-col gap-6'data-aos="fade-up">
         <h3 className='text-2xl font-bold capitalize'>Manage student count from Orphan Status</h3>
-        <TableJSPOS data={data?.JSPS}/>
+        <TableJSPOS data={data?.JSPOS}/>
       </div>
     </section>
   )
