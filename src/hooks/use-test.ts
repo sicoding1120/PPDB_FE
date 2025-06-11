@@ -180,9 +180,12 @@ const useTest = () => {
       return { updateQuestionFn };
     };
     const useDeleteQuestion = (id: string) => {
+      const queryClient = useQueryClient();
       const { mutate: deleteQuestionMutate } = useMutation({
         mutationFn: () => deleteQuestion(id),
         onSuccess: () => {
+
+          queryClient.invalidateQueries({ queryKey: ["/test"] });
           Swal.fire({
             title: "success remove question",
             icon: "success",

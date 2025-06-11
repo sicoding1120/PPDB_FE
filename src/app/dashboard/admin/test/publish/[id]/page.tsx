@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import React, { use } from 'react'
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/ui/table'
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableHead,
+//   TableHeader,
+//   TableRow
+// } from '@/components/ui/table'
 import useTest from '@/hooks/use-test'
 import { Button } from '@/components/ui/button'
 import { IoMdArrowRoundBack } from 'react-icons/io'
@@ -27,7 +26,7 @@ const DetailPublishPage = ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <section className='w-full min-h-screen '>
-      <div className='w-full mx-auto bg-white rounded-xl shadow p-6 space-y-6'>
+      <div className='w-full mx-auto bg-white dark:bg-[#282C34] dark:text-[#ABB2BF] rounded-xl shadow p-6 space-y-6'>
         <div className='w-full h-6'>
           <Button onClick={() => router.back()} className='w-1/10 bg-green-500 capitalize hover:bg-green-500/80'>
             <IoMdArrowRoundBack />
@@ -36,7 +35,7 @@ const DetailPublishPage = ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
         {/* Header */}
         <div className='mb-4 text-center'>
-          <h2 className='text-3xl font-bold text-gray-800'>
+          <h2 className='text-3xl font-bold text-gray-800  dark:text-[#ABB2BF]'>
             Graduation Result Details
           </h2>
           <p className='text-md text-gray-500'>
@@ -159,16 +158,16 @@ const DetailPublishPage = ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
         </div>
 
-        <div className='flex justify-between items-center my-10'>
+        {/* <div className='flex justify-between items-center my-10'>
           <hr className='border-green-500 w-1/3' />
           <p className='text-green-500 text-xl capitalize font-semibold'>
             All Test Results
           </p>
           <hr className='border-green-500 w-1/3' />
-        </div>
+        </div> */}
 
         {/* Test Results */}
-        <div className='overflow-x-auto rounded-lg border border-green-300 shadow-sm bg-white'>
+        {/* <div className='overflow-x-auto rounded-lg border border-green-300 shadow-sm bg-white'>
           <Table className='min-w-full'>
             <TableHeader className='bg-green-50 text-green-900 font-semibold uppercase tracking-wide'>
               <TableRow>
@@ -211,7 +210,7 @@ const DetailPublishPage = ({ params }: { params: Promise<{ id: string }> }) => {
                 ))}
             </TableBody>
           </Table>
-        </div>
+        </div> */}
       </div>
     </section>
   )

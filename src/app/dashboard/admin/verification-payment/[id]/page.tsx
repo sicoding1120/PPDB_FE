@@ -20,7 +20,7 @@ const DetailPaymentPage = ({ params }: DetailPaymentProps) => {
   console.log(data, isLoading)
   return (
     <section className='w-full h-full py-6 px-12'>
-      <div className='w-full h-full bg-white px-4 py-12 rounded-3xl'>
+      <div className='w-full h-full bg-white dark:bg-[#282C34] dark:text-[#ABB2BF] px-4 py-12 rounded-3xl'>
         <div
           className='w-full h-1/2 rounded-xl flex justify-center items-center flex-col gap-4'
           id='header'
@@ -37,7 +37,7 @@ const DetailPaymentPage = ({ params }: DetailPaymentProps) => {
           </div>
           <div className='w-full h-full mt-2 flex flex-col gap-6 px-6 py-4'>
             <div className='w-full flex justify-between items-center capitalize'>
-              <span className='font-semibold text-black/50 text-xl'>
+              <span className='font-semibold text-black/50 dark:text-[#ABB2BF]  text-xl'>
                 Ref Number
               </span>
               <span className='uppercase text-xl font-semibold'>
@@ -45,7 +45,7 @@ const DetailPaymentPage = ({ params }: DetailPaymentProps) => {
               </span>
             </div>
             <div className='w-full flex justify-between items-center capitalize'>
-              <span className='font-semibold text-black/50 text-xl'>
+              <span className='font-semibold text-black/50 dark:text-[#ABB2BF] text-xl'>
                 Payment Time
               </span>
               <span className='uppercase text-xl font-semibold'>
@@ -53,7 +53,7 @@ const DetailPaymentPage = ({ params }: DetailPaymentProps) => {
               </span>
             </div>
             <div className='w-full flex justify-between items-center capitalize'>
-              <span className='font-semibold text-black/50 text-xl'>
+              <span className='font-semibold text-black/50 dark:text-[#ABB2BF] text-xl'>
                 Payment Method
               </span>
               <span className='uppercase text-xl font-semibold'>
@@ -61,7 +61,7 @@ const DetailPaymentPage = ({ params }: DetailPaymentProps) => {
               </span>
             </div>
             <div className='w-full flex justify-between items-center capitalize mb-2'>
-              <span className='font-semibold text-black/50 text-xl'>
+              <span className='font-semibold text-black/50 dark:text-[#ABB2BF] text-xl'>
                 Sender Name
               </span>
               <span className='uppercase text-xl font-semibold'>
@@ -70,7 +70,7 @@ const DetailPaymentPage = ({ params }: DetailPaymentProps) => {
             </div>
             <hr className='text-slate-200' />
             <div className='w-full flex justify-between items-center capitalize mt-2'>
-              <span className='font-semibold text-black/50 text-xl'>
+              <span className='font-semibold text-black/50 dark:text-[#ABB2BF] text-xl'>
                 Amount Paid
               </span>
               <span className='uppercase text-xl font-semibold'>
@@ -78,7 +78,7 @@ const DetailPaymentPage = ({ params }: DetailPaymentProps) => {
               </span>
             </div>
             <div className='w-full flex justify-between items-center capitalize'>
-              <span className='font-semibold text-black/50 text-xl'>
+              <span className='font-semibold text-black/50 dark:text-[#ABB2BF] text-xl'>
                 Admin Fee
               </span>
               <span className='uppercase text-xl font-semibold'>
@@ -86,7 +86,7 @@ const DetailPaymentPage = ({ params }: DetailPaymentProps) => {
               </span>
             </div>
             <div className='w-full flex justify-between items-center capitalize'>
-              <span className='font-semibold text-black/50 text-xl'>
+              <span className='font-semibold text-black/50 dark:text-[#ABB2BF] text-xl'>
                 Payment Status
               </span>
              <StatusPaymentBadge status={data?.paymentStatus} />

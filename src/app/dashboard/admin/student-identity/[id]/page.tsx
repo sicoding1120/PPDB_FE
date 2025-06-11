@@ -54,7 +54,7 @@ const DetailStudent = ({ params }: DetailStudentProps) => {
   }
 
   return (
-    <div className='w-full  p-6 bg-white rounded-2xl shadow-md'>
+    <div className='w-full  p-6 bg-white dark:bg-[#282C34] dark:text-[#ABB2BF] rounded-2xl shadow-md'>
       <div className='w-full h-12'>
         <Button
           className='bg-green-500 border border-green-500 hover:cursor-pointer px-4 hover:bg-green-500'
@@ -80,7 +80,7 @@ const DetailStudent = ({ params }: DetailStudentProps) => {
       <form className='grid grid-cols-1 md:grid-cols-2 gap-4 text-sm'>
         {studentFields.map(({ label, key }) => (
           <div key={key}>
-            <label className='block font-medium text-gray-700 mb-1'>
+            <label className='block font-medium text-gray-700 dark:text-[#ABB2BF] mb-1'>
               {label}
             </label>
             <input
@@ -94,7 +94,7 @@ const DetailStudent = ({ params }: DetailStudentProps) => {
         ))}
 
         <div>
-          <label className='block font-medium text-gray-700 mb-1'>Gender</label>
+          <label className='block font-medium text-gray-700 dark:text-[#ABB2BF] mb-1'>Gender</label>
           <div className='flex gap-4 mt-2'>
             {['LK', 'PR'].map(gender => (
               <label key={gender} className='flex items-center gap-1'>
@@ -111,7 +111,7 @@ const DetailStudent = ({ params }: DetailStudentProps) => {
 
         {/* Address */}
         <div className='md:col-span-2'>
-          <label className='block font-medium text-gray-700 mb-1'>
+          <label className='block font-medium text-gray-700 dark:text-[#ABB2BF] mb-1'>
             Residential Address
           </label>
           <textarea
@@ -136,7 +136,7 @@ const DetailStudent = ({ params }: DetailStudentProps) => {
         {['father', 'mother'].map(parentType =>
           ParentField.map(({ label, key }) => (
             <div key={`${parentType}-${key}`}>
-              <label className='block font-medium text-gray-700 mb-1'>
+              <label className='block font-medium text-gray-700 dark:text-[#ABB2BF] mb-1'>
                 {`${
                   parentType.charAt(0).toUpperCase() + parentType.slice(1)
                 } ${label}`}
@@ -162,7 +162,7 @@ const DetailStudent = ({ params }: DetailStudentProps) => {
 
       <div className='overflow-x-auto'>
 <Table className='rounded-xl overflow-hidden border border-gray-200 shadow-sm text-sm'>
-  <TableHeader className='bg-green-50 text-gray-700'>
+  <TableHeader className='bg-green-50 dark:bg-green-500 text-gray-700 dark:text-[#ABB2BF]'>
     <TableRow className='divide-x divide-gray-200'>
       <TableHead className='w-16 text-center'>No</TableHead>
       <TableHead>Name File</TableHead>
@@ -178,10 +178,10 @@ const DetailStudent = ({ params }: DetailStudentProps) => {
           key={key}
           className='divide-x divide-gray-100 hover:bg-green-50/40 transition-colors'
         >
-          <TableCell className='text-center text-gray-700 font-medium'>
+          <TableCell className='text-center text-gray-700 dark:text-[#ABB2BF] font-medium'>
             {index + 1}
           </TableCell>
-          <TableCell className='text-gray-800 font-medium px-4'>
+          <TableCell className='text-gray-800 dark:text-[#ABB2BF] font-medium px-4'>
             {formatLabel(key)}
           </TableCell>
           <TableCell className='text-blue-600 underline break-all px-4 max-w-xs ellipsis-link'>
