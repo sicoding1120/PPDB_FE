@@ -121,7 +121,7 @@ export default class CircleChart extends PureComponent<Props> {
             dataKey='value'
             onMouseEnter={this.onPieEnter}
           />
-          {this.props.data.map((entry, index) => (
+          {this?.props?.data?.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.fill} />
           ))}
         </PieChart>

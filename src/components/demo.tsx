@@ -16,7 +16,7 @@ const poppins = Poppins({
 export default function Demo() {
     return (
         <>
-            <div className="mt-32" data-aos="fade-up" data-aos-duration="1000">
+            <div className="pt-32 bg-white" data-aos="fade-up" data-aos-duration="1000">
                 <div
                     className="
                         flex justify-center items-center space-x-32 

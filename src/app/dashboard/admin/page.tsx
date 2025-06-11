@@ -20,13 +20,8 @@ import { IoEyeSharp } from 'react-icons/io5'
 
 
 const DashboardPage = () => {
-  const dataPenerimaanSiswa = [
-    { name: 'Lolos', value: 50, fill: '#22C55E' },
-    { name: 'Tidak lolos', value: 20, fill: '#EF4444' },
-    { name: 'keluar', value: 20, fill: '#FCAA09' }
-  ]
   
-
+  
   const date = new Date()
 
   const formattedDate = new Intl.DateTimeFormat('id-ID', {
@@ -40,6 +35,7 @@ const DashboardPage = () => {
   const { data} = useOverview();
 
 
+  const dataPenerimaanSiswa = data?.studentStatus
  
 
   return (

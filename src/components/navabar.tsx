@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Instagram, Menu, Twitter, X } from 'lucide-react';
-import { Button } from './ui/button';
 import { FaFacebook } from 'react-icons/fa';
 import { Poppins } from 'next/font/google';
 
@@ -52,9 +51,9 @@ export default function NavbarK() {
               <Link href="#" className="text-gray-700 hover:text-green-600"><FaFacebook className="w-5 h-5" /></Link>
               <Link href="#" className="text-gray-700 hover:text-green-600"><Instagram className="w-5 h-5" /></Link>
             </div>
-            <Button asChild variant={"custom"} className="px-4 py-2">
+            {/* <Button asChild variant={"custom"} className="px-4 py-2">
               <Link href="/install">Install</Link>
-            </Button>
+            </Button> */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,12 +79,12 @@ export default function NavbarK() {
             <Link href="/login" className="text-gray-700 hover:text-green-600"><FaFacebook className="w-5 h-5" /></Link>
             <Link href="/login" className="text-gray-700 hover:text-green-600"><Instagram className="w-5 h-5" /></Link>
           </div>
-          <Link
+          {/* <Link
             href="/install"
             className="block bg-green-600 text-white px-4 py-2 rounded-lg text-center hover:bg-green-700 transition"
           >
             Install
-          </Link>
+          </Link> */}
         </div>
       )}
     </nav>

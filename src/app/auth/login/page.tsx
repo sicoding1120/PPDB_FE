@@ -19,6 +19,7 @@ import {
 
 import * as yup from "yup";
 import useAuthModule, { LoginPayload } from "@/hooks/use-auth";
+import FullscreenPopup from "@/components/fullscreen-popup";
 
 const LoginSchema = yup.object().shape({
   email: yup
@@ -51,6 +52,7 @@ const LoginPage = () => {
 
     return (
         <>
+            <FullscreenPopup/>
             <div className="w-full h-full flex">
                 <div className="w-[50%] h-screen flex justify-center items-center p-4">
                     <div className="w-full h-full bg-login rounded-lg flex justify-center items-center">

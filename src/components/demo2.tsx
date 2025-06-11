@@ -13,7 +13,7 @@ const poppins = Poppins({
 
 export default function Demo2() {
   return (
-    <div className="flex flex-col-reverse items-center gap-y-20 mt-40 lg:flex-row lg:justify-center lg:items-center lg:gap-x-20 lg:gap-y-0">
+    <div className="flex flex-col-reverse items-center gap-y-20 pt-40 lg:flex-row lg:justify-center lg:items-center lg:gap-x-20 lg:gap-y-0 bg-white">
 
       {/* TEXT */}
       <div className="flex flex-col space-y-12 max-w-lg px-4 sm:px-8" data-aos="fade-left">

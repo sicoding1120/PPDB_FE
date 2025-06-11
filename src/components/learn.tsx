@@ -12,7 +12,7 @@ const poppins = Poppins({
 
 export default function Learn() {
     return (
-        <div className="flex flex-col w-full min-h-screen mt-28 space-y-16 px-4">
+        <div className="flex flex-col w-full min-h-screen pt-28 space-y-16 px-4 bg-white">
             {/* Heading */}
             <div className="flex flex-col justify-center items-center space-y-4 text-center">
                 <p className={`text-xs font-semibold ${poppins.className}`} id="About">WHAT I LEARN ?</p>
