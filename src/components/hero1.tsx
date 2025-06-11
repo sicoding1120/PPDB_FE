@@ -76,14 +76,14 @@ export default function Hero1 () {
         {/* Gambar Mockup */}
         <Image
           src='/assets/Mockup.png'
-          width={900}
-          height={900}
+          width={950}
+          height={950}
           alt='phone'
-          className='w-auto max-w-[80%] md:max-w-[255px] mt-20'
+          className='w-[350px] h-[350px] md:mt-22'
         />
 
         {/* Gradient bawah */}
-        <div className='absolute bottom-[-52px] w-full h-20 bg-gradient-to-t from-black/40 to-transparent dark:from-[#1E2127]/80 to-transparent z-10 pointer-events-none' />
+        <div className='absolute bottom-[-52px] w-full h-20 bg-gradient-to-t from-black/40 dark:from-[#1E2127]/80 to-transparent z-10 pointer-events-none' />
       </div>
     </div>
   )
